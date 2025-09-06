@@ -130,7 +130,7 @@ export default function Portfolio() {
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="#projects" icon={ExternalLink}>View My Work</Button>
-              <Button href="/res/SankalpNaikResume.pdf" variant="ghost" icon={Code2}>Download Resume</Button>
+              <Button href={`${base}/res/SankalpNaikResume.pdf`} variant="ghost" icon={Code2}>Download Resume</Button>
             </div>
 
             <div className="mt-6 flex items-center gap-4 text-white/70">
