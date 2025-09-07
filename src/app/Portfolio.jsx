@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { Card as Card1, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
+import { Typewriter } from 'react-simple-typewriter'
+import Image from "next/image";
+import FloatingParallaxCard from "@/components/FloatingParallaxCard";
+
 
 
 
@@ -68,7 +72,7 @@ const EXPERIENCE = [
     years: "2022 – Present",
     blurb:
       "Infra team for a banking platform; owned performance-critical components.",
-    awards:"PaceSetter Award for exceptional performance in Oracle.",
+    awards:"PaceSetter Award for exceptional performance at Oracle.",
     tags: ["Java", "JaxRS", "SQL", "Distributed Systems", "JPA"],
   },
   {
@@ -122,15 +126,26 @@ export default function Portfolio() {
               </h1>
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-semibold mt-2">AI/ML Engineer & Systems Developer</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-left w-full">
+              <Typewriter
+                words={['AI/ML Engineer', 'Systems Engineer']}
+                loop={0}             // 0 = infinite
+                cursor
+                cursorStyle="|"
+                typeSpeed={80}       // typing speed in ms
+                deleteSpeed={50}     // backspace speed
+                delaySpeed={1500}    // wait before deleting
+              />
+            </h2>
             <p className="mt-4 text-white/80 max-w-xl">
               Passionate about intelligent systems, edge inference, and hardware‑aware ML. I love turning
               research into production—fast, reliable, and delightful.
             </p>
+            
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Button href="#projects" icon={ExternalLink}>View My Work</Button>
-              <Button href={`${base}/res/SankalpNaikResume.pdf`} variant="ghost" icon={Code2}>Download Resume</Button>
+              <Button href={`/res/SankalpNaikResume.pdf`} variant="ghost" icon={Code2}>Download Resume</Button>
             </div>
 
             <div className="mt-6 flex items-center gap-4 text-white/70">
@@ -147,11 +162,19 @@ export default function Portfolio() {
             transition={{ duration: 0.6 }}
             className="rounded-[28px] overflow-hidden border border-white/15 bg-white/5 backdrop-blur shadow-2xl"
           >
-            <img
-              src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop"
+           
+            <FloatingParallaxCard
+              src="/res/SankalpNaik-removebg-preview.png"   // your image
+              alt="Profile"
+              fill                      // fills the parent div
+              className="object-cover"  // scales + crops to fit
+            />
+
+            {/* <img
+              src="/res/SankalpNaik-removebg-preview.png"
               alt="Desk setup with code"
               className="w-full h-[420px] object-cover"
-            />
+            /> */}
           </motion.div>
         </div>
       </section>
@@ -187,56 +210,29 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
-        <h3 className="text-3xl font-bold mb-2">Featured Projects</h3>
-        <p className="text-white/70 mb-6">A selection of recent work showcasing applied ML and systems craft.</p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            {
-              title: 'Intent Classifier',
-              img: '/res/NER.svg',
-              desc: 'Intent based smart navigation for complex financial systems.',
-              tags: ['Python','Flask','Named Entity Recognition'],
-            }
-          ].map((p) => (
-            <Card1 key={p.title} className="px-6 pb-6 pt-4">
-              <img src={p.img} alt="project" className="rounded-2xl mb-4 h-40 w-full object-cover" />
-              <h4 className="font-semibold text-lg">{p.title}</h4>
-              <p className="text-sm text-white/80 mt-1 mb-3">{p.desc}</p>
-              <div className="flex flex-wrap gap-2 mb-4">{p.tags.map(t => <Tag key={t}>{t}</Tag>)}</div>
-              <div className="flex gap-3">
-                <Button href="#"><Code2 size={16}/>Code</Button>
-                <Button href="#" variant="ghost" icon={ExternalLink}>Demo</Button>
-              </div>
-            </Card1>
-          ))}
-        </div>
-      </section>
-
       {/* Experience*/}
 
       
       <section id="resume" className="max-w-6xl mx-auto px-4 py-12">
-  <div className="grid md:grid-cols-2 gap-8">
-    {/* Left: Education */}
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Education</h3>
-      <div className="space-y-6">
-        {EDUCATION.map((item) => (
-          <Card1 key={item.title} className="rounded-2xl border-border/60">
-            <CardHeader>
-              <CardTitle className="text-lg">{item.title}</CardTitle>
-              <CardDescription>
-                {item.org} • {item.years}
-                {/* Award Highlight */}
-                {item.awards && (
-                  <div className="mt-4 flex items-center gap-2 text-amber-400">
-                  <Award className="h-5 w-5" />
-                  <span className="font-medium">{item.awards}</span>
-                </div>
-                )}
-                
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Left: Education */}
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Education</h3>
+            <div className="space-y-6">
+              {EDUCATION.map((item) => (
+                <Card1 key={item.title} className="rounded-2xl border-border/60">
+                  <CardHeader>
+                    <CardTitle className="text-lg">{item.title}</CardTitle>
+                    <CardDescription>
+                      {item.org} • {item.years}
+                      {/* Award Highlight */}
+                      {item.awards && (
+                        <div className="mt-4 flex items-center gap-2 text-amber-400">
+                        <Award className="h-5 w-5" />
+                        <span className="font-medium">{item.awards}</span>
+                      </div>
+                      )}
+                      
               </CardDescription>
               
             </CardHeader>
@@ -257,71 +253,67 @@ export default function Portfolio() {
     </div>
 
     {/* Right: Experience */}
-    <div>
-      <h3 className="text-xl font-semibold mb-4">Experience</h3>
-      <div className="space-y-6">
-        {EXPERIENCE.map((item) => (
-          <Card key={item.title} className="rounded-2xl border-border/60">
-            <CardHeader>
-              <CardTitle className="text-lg">{item.title}</CardTitle>
-              <CardDescription>
-                {item.org} • {item.years}
-                {/* Award Highlight */}
-                {item.awards && (
-                  <div className="mt-4 flex items-center gap-2 text-amber-400">
-                  <Award className="h-5 w-5" />
-                  <span className="font-medium">{item.awards}</span>
+      <div>
+        <h3 className="text-xl font-semibold mb-4">Experience</h3>
+        <div className="space-y-6">
+          {EXPERIENCE.map((item) => (
+            <Card key={item.title} className="rounded-2xl border-border/60">
+              <CardHeader>
+                <CardTitle className="text-lg">{item.title}</CardTitle>
+                <CardDescription>
+                  {item.org} • {item.years}
+                  {/* Award Highlight */}
+                  {item.awards && (
+                    <div className="mt-4 flex items-center gap-2 text-amber-400">
+                    <Award className="h-5 w-5" />
+                    <span className="font-medium">{item.awards}</span>
+                  </div>
+                  )}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-muted-foreground">
+                <p className="mb-3">{item.blurb}</p>
+                <div className="flex flex-wrap gap-2">
+                  {item.tags.map((t) => (
+                    <Badge key={t} variant="outline" className="backdrop-blur bg-white/5 border-white/10">
+                      {t}
+                    </Badge>
+                  ))}
                 </div>
-                )}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="text-muted-foreground">
-              <p className="mb-3">{item.blurb}</p>
-              <div className="flex flex-wrap gap-2">
-                {item.tags.map((t) => (
-                  <Badge key={t} variant="outline" className="backdrop-blur bg-white/5 border-white/10">
-                    {t}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-      <section id="experience" className="mx-auto max-w-7xl px-6 py-12">
-        <h3 className="text-3xl font-bold mb-6">Experience</h3>
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card>
-            <h4 className="text-xl font-semibold">Associate Applications Developer</h4>
-            <p className="text-white/80">Oracle Financial Services • 2022 – Present</p>
-            <p className="mt-2 text-white/80">Was part of Infra team which managed the framework of a banking application.</p>
-            <div className="mt-3 flex flex-wrap gap-2">{['PyTorch','CUDA','AWS','Docker','MLOps'].map(t => <Tag key={t}>{t}</Tag>)}</div>
-          </Card>
-          <Card>
-            <h4 className="text-xl font-semibold">M.S. (AIE – ECE)</h4>
-            <p className="text-white/80">Carnegie Mellon University • 2025 – 2027</p>
-            <p className="mt-2 text-white/80">Interests: Hardware‑aware NAS, edge inference, systems for ML.</p>
-            <div className="mt-3 flex flex-wrap gap-2">{['Research','Deep Learning','Systems','Robotics'].map(t => <Tag key={t}>{t}</Tag>)}</div>
-          </Card>
-          <Card>
-            <h4 className="text-xl font-semibold">AI Developer</h4>
-            <p className="text-white/80">Oracle • 2020 – 2022</p>
-            <p className="mt-2 text-white/80">Built end‑to‑end ML pipelines; deployed 15+ models serving 50M+ predictions monthly.</p>
-            <div className="mt-3 flex flex-wrap gap-2">{['TensorFlow','GCP','Kubernetes','Apache Beam'].map(t => <Tag key={t}>{t}</Tag>)}</div>
-          </Card>
-          <Card>
-            <h4 className="text-xl font-semibold">B.Tech (ECE)</h4>
-            <p className="text-white/80">VNIT • 2016 – 2020</p>
-            <p className="mt-2 text-white/80">Top of class; coursework in Algorithms, Signals, VLSI, ML.</p>
-            <div className="mt-3 flex flex-wrap gap-2">{['Algorithms','Statistics','Mathematics','Programming'].map(t => <Tag key={t}>{t}</Tag>)}</div>
-          </Card>
-        </div>
-      </section>
+        {/* Projects */}
+        <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
+          <h3 className="text-3xl font-bold mb-2">Featured Projects</h3>
+          <p className="text-white/70 mb-6">A selection of recent work showcasing applied ML and systems craft.</p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Intent Classifier',
+                img: '/res/NER.svg',
+                desc: 'Intent based smart navigation for complex financial systems.',
+                tags: ['Python','Flask','Named Entity Recognition'],
+              }
+            ].map((p) => (
+              <Card1 key={p.title} className="px-6 pb-6 pt-4">
+                <img src={p.img} alt="project" className="rounded-2xl mb-4 h-40 w-full object-cover" />
+                <h4 className="font-semibold text-lg">{p.title}</h4>
+                <p className="text-sm text-white/80 mt-1 mb-3">{p.desc}</p>
+                <div className="flex flex-wrap gap-2 mb-4">{p.tags.map(t => <Tag key={t}>{t}</Tag>)}</div>
+                <div className="flex gap-3">
+                  <Button href="#"><Code2 size={16}/>Code</Button>
+                  <Button href="#" variant="ghost" icon={ExternalLink}>Demo</Button>
+                </div>
+              </Card1>
+            ))}
+          </div>
+        </section>
 
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-7xl px-6 py-12">
