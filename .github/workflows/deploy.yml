@@ -30,6 +30,14 @@ jobs:
       - name: Install deps
         run: npm ci
 
+       # ⬇️ Custom domain => empty base path
+      - name: Set base path for custom domain
+        run: echo "NEXT_PUBLIC_BASE_PATH=" >> $GITHUB_ENV
+
+      # Optional: ensure CNAME is in the artifact (replace with your domain)
+      - name: Add CNAME
+        run: echo "YOUR_DOMAIN_HERE" > out/CNAME
+
       # Optional: set the repo name for project pages
       - name: Set REPO var
         if: ${{ !env.NEXT_PUBLIC_REPO_NAME }}
