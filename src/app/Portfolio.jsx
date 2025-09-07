@@ -49,7 +49,7 @@ const EDUCATION = [
   {
     title: "M.S. (AIE – ECE)",
     org: "Carnegie Mellon University",
-    years: "2025 – 2027",
+    years: "2025 – 2026",
     blurb:
       "Interests: Hardware-aware NAS, edge inference, systems for ML.",
     tags: ["Research", "Deep Learning", "Systems", "Robotics"],
