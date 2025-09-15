@@ -213,7 +213,7 @@ export default function Portfolio() {
       {/* Experience*/}
 
       
-      <section id="resume" className="max-w-6xl mx-auto px-4 py-12">
+      <section id='experience' className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-8">
           {/* Left: Education */}
           <div>

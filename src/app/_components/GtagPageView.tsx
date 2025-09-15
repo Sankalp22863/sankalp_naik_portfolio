@@ -9,7 +9,6 @@ export default function GtagPageView() {
 
   useEffect(() => {
     const url = pathname + (searchParams?.toString() ? `?${searchParams}` : "");
-    // @ts-ignore
     window.gtag?.("event", "page_view", { page_path: url });
   }, [pathname, searchParams]);
 
