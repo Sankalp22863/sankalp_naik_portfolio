@@ -9,7 +9,9 @@ export default function GtagPageView() {
 
   useEffect(() => {
     const url = pathname + (searchParams?.toString() ? `?${searchParams}` : "");
-    window.gtag?.("event", "page_view", { page_path: url });
+    if (typeof window !== "undefined") {
+      window.gtag?.("event", "page_view", { page_path: url });
+    }
   }, [pathname, searchParams]);
 
   return null;
