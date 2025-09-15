@@ -30,9 +30,14 @@ jobs:
       - name: Install deps
         run: npm ci
 
-       # ⬇️ Custom domain => empty base path
+      # ⬇️ Custom domain => empty base path
       - name: Set base path for custom domain
         run: echo "NEXT_PUBLIC_BASE_PATH=" >> $GITHUB_ENV
+      
+      # ⬇️ Setting up the google analytics for the portfolio website.
+      - name: Set GA ID
+        run: echo "NEXT_PUBLIC_GA_ID=G-1F2J2C58G8" >> $GITHUB_ENV
+      
 
       # Optional: ensure CNAME is in the artifact (replace with your domain)
       - name: Add CNAME
