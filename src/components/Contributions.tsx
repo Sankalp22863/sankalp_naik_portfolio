@@ -1,17 +1,17 @@
 "use client";
 
-import GitHubCalendar, { ThemeInput } from "react-github-calendar";
+import GitHubCalendar from "react-github-calendar";
 
-const glossyGreenTheme: ThemeInput = {
+const glossyGreenTheme = {
   dark: [
-    "#2f2f2f",      // 👈 gray for empty cells in dark mode
-    "#14532d",      // low green
-    "#166534",      // medium green
-    "#22c55e",      // bright green
-    "#4ade80",      // glossy highlight green
+    "#2f2f2f",  // gray for empty cells
+    "#14532d",  // low green
+    "#166534",  // medium green
+    "#22c55e",  // bright green
+    "#4ade80",  // highlight green
   ],
   light: [
-    "#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39" // GitHub default greens
+    "#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"
   ],
 };
 
