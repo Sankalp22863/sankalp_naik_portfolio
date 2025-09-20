@@ -41,7 +41,7 @@ jobs:
 
       # Optional: ensure CNAME is in the artifact (replace with your domain)
       - name: Add CNAME
-        run: echo "YOUR_DOMAIN_HERE" > out/CNAME
+        run: echo "sankalpnaik.me" > out/CNAME
 
       # Optional: set the repo name for project pages
       - name: Set REPO var
