@@ -7,6 +7,11 @@ import { Award } from "lucide-react";
 import { Typewriter } from 'react-simple-typewriter'
 import Image from "next/image";
 import FloatingParallaxCard from "@/components/FloatingParallaxCard";
+import dynamic from "next/dynamic";
+
+const Contributions = dynamic(() => import("@/components/Contributions"), {
+  ssr: false, // render only on client to avoid hydration mismatch
+});
 
 
 
@@ -314,6 +319,10 @@ export default function Portfolio() {
             ))}
           </div>
         </section>
+        <section id="contribution" className="mx-auto max-w-7xl px-6 py-12">
+            <Contributions />
+        </section>
+        
 
       {/* Contact */}
       <section id="contact" className="mx-auto max-w-7xl px-6 py-12">
@@ -365,6 +374,7 @@ export default function Portfolio() {
             <ul className="space-y-1 text-white/80">
               <li><a href="#skills" className="hover:text-white">Skills</a></li>
               <li><a href="#projects" className="hover:text-white">Projects</a></li>
+              <a href="#contributions"  className="hover:text-white">Contributions</a>    
               <li><a href="#experience" className="hover:text-white">Experience</a></li>
               <li><a href="#contact" className="hover:text-white">Contact</a></li>
             </ul>
