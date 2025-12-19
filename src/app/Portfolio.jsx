@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card as Card1, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -93,6 +93,48 @@ const EXPERIENCE = [
 ];
 
 export default function Portfolio() {
+  const projectsRef = useRef(null);
+
+  useEffect(() => {
+    if (!projectsRef.current) return;
+    const container = projectsRef.current;
+
+    const updateHeights = () => {
+      const items = container.querySelectorAll(".project-measure");
+      if (!items.length) return;
+
+      // reset heights to measure natural heights
+      items.forEach((el) => (el.style.height = "auto"));
+
+      let max = 0;
+      items.forEach((el) => {
+        const h = el.getBoundingClientRect().height;
+        if (h > max) max = h;
+      });
+
+      // set all to max
+      items.forEach((el) => (el.style.height = `${max}px`));
+    };
+
+    // initial
+    updateHeights();
+
+    // resize
+    window.addEventListener("resize", updateHeights);
+
+    // observe DOM changes inside (e.g., collapse/expand)
+    const observer = new MutationObserver(() => {
+      // small timeout to wait for layout changes
+      setTimeout(updateHeights, 30);
+    });
+    observer.observe(container, { subtree: true, childList: true, attributes: true });
+
+    return () => {
+      window.removeEventListener("resize", updateHeights);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="dark min-h-screen text-white bg-[#0b0d12] [--ring:theme(colors.indigo.400)]">
       {/* Top nav */}
@@ -298,12 +340,15 @@ export default function Portfolio() {
     {/* Projects */}
     <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
       <h3 className="text-3xl font-bold mb-6">Projects</h3>
-
-      <div className="overflow-x-auto -mx-6 px-6 pb-4" aria-label="Projects carousel">
-        <div className="flex gap-6 w-max snap-x snap-mandatory">
+  
+      <div ref={projectsRef} className="overflow-x-auto -mx-6 px-6 pb-4" aria-label="Projects carousel">
+        <div className="flex gap-6 w-max snap-x snap-mandatory items-stretch">
           {projects.map((p) => (
             <div key={p.title} className="snap-start flex-shrink-0 w-[20rem]">
-              <ProjectCard p={p} />
+              {/* project-measure will be measured and sized to the max height */}
+              <div className="project-measure h-auto">
+                <ProjectCard p={p} />
+              </div>
             </div>
           ))}
         </div>

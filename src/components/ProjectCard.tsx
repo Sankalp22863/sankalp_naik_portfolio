@@ -12,13 +12,9 @@ export function ProjectCard({ p }: Props) {
   const descId = `desc-${p.title.replace(/[^a-z0-9]/gi, "-").toLowerCase()}`;
 
   return (
-    <Card key={p.title} className="px-6 pb-6 pt-4">
-      <img
-        src={p.img}
-        alt={p.title}
-        className="rounded-2xl mb-4 h-40 w-full object-cover"
-        loading="lazy"
-      />
+    // fill available height so the parent-measured wrapper controls size
+    <Card key={p.title} className="px-6 pb-6 pt-4 h-full flex flex-col">
+      {/* image removed */}
       <h4 className="font-semibold text-lg">{p.title}</h4>
 
       <div className="mt-1">
@@ -50,7 +46,8 @@ export function ProjectCard({ p }: Props) {
         ))}
       </div>
 
-      <div className="flex gap-3">
+      {/* push actions to bottom so layout lines up across cards */}
+      <div className="mt-auto flex gap-3">
         {p.codeUrl && (
           <Button asChild>
             <a href={p.codeUrl} target="_blank" rel="noreferrer">
