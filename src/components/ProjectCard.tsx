@@ -7,6 +7,32 @@ import { Label as Tag } from "@/components/ui/label";
 
 type Props = { p: Project };
 
+// deterministic color variants for tags (same tag -> same color)
+const COLOR_VARIANTS = [
+  "bg-sky-600/20 border-sky-400/40 text-sky-300",
+  "bg-emerald-600/20 border-emerald-400/40 text-emerald-300",
+  "bg-rose-600/20 border-rose-400/40 text-rose-300",
+  "bg-amber-600/20 border-amber-400/40 text-amber-300",
+  "bg-violet-600/20 border-violet-400/40 text-violet-300",
+  "bg-indigo-600/20 border-indigo-400/40 text-indigo-300",
+  "bg-lime-600/20 border-lime-400/40 text-lime-300",
+  "bg-fuchsia-600/20 border-fuchsia-400/40 text-fuchsia-300",
+];
+
+function hashString(s: string) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h << 5) - h + s.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
+function tagClass(tag: string) {
+  const idx = hashString(tag) % COLOR_VARIANTS.length;
+  return `rounded-xl px-3 py-1 text-xs font-medium border ${COLOR_VARIANTS[idx]}`;
+}
+
 export function ProjectCard({ p }: Props) {
   const [open, setOpen] = useState(false);
   const descId = `desc-${p.title.replace(/[^a-z0-9]/gi, "-").toLowerCase()}`;
@@ -40,9 +66,9 @@ export function ProjectCard({ p }: Props) {
 
       <div className="flex flex-wrap gap-2 mb-4">
         {p.tags?.map((t) => (
-          <Tag key={t} className="rounded-xl px-3 py-1 text-xs font-medium bg-white/5 border border-white/10 text-white/80">
-              {t}
-           </Tag>
+          <Tag key={t} className={tagClass(t)}>
+            {t}
+          </Tag>
         ))}
       </div>
 
