@@ -20,7 +20,9 @@ export function ProjectCard({ p }: Props) {
 
       <div className="flex flex-wrap gap-2 mb-4">
         {p.tags?.map((t) => (
-          <Tag key={t}>{t}</Tag>
+          <Tag key={t} className="rounded-xl px-3 py-1 text-xs font-medium bg-white/5 border border-white/10 text-white/80">
+              {t}
+           </Tag>
         ))}
       </div>
 

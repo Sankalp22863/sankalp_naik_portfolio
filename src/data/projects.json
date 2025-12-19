@@ -6,5 +6,30 @@
     "tags": ["Python", "Flask", "Named Entity Recognition"],
     "codeUrl": "https://github.com/Sankalp22863/IntentClassification.git",
     "featured": true
+  }, 
+  {
+    "title": "Optimal Portfolio Optimization",
+    "img": "/res/portfolio.svg",
+    "desc": "Portfolio optimization system using quantitative finance techniques to maximize returns while minimizing risk.",
+    "tags": ["Python", "Optimization", "Finance", "Risk Management", "Algorithms"],
+    "codeUrl": "https://github.com/Sankalp22863/optimal_portfolio",
+    "featured": true
+  }, 
+  {
+    "title": "Fault-Tolerant Distributed System",
+    "img": "/res/distributed.svg",
+    "desc": "A fault-tolerant distributed system implementing active and passive replication with failure detection and recovery components.",
+    "tags": ["Python", "Distributed Systems", "Fault Tolerance", "Replication", "Networking"],
+    "codeUrl": "https://github.com/Sankalp22863/DistributedSystem",
+    "featured": true
+  }, 
+  {
+    "title": "Codesign Optimization Framework",
+    "img": "/res/codesign.svg",
+    "desc": "A co-design optimization framework for jointly optimizing system architecture and control parameters under performance and resource constraints.",
+    "tags": ["Python", "Co-Design", "Optimization", "Control Systems", "Algorithms"],
+    "codeUrl": "https://github.com/Sankalp22863/codesign-opt",
+    "featured": true
   }
+
 ]
