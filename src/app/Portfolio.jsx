@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu } from "lucide-react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card as Card1, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -96,6 +96,25 @@ const EXPERIENCE = [
 
 export default function Portfolio() {
   const projectsRef = useRef(null);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const uniqueTags = useMemo(
+    () => Array.from(new Set(projects.flatMap((p) => p.tags || []))).sort(),
+    [projects]
+  );
+
+  const filteredProjects = useMemo(
+    () =>
+      selectedTags.length === 0
+        ? projects
+        : projects.filter((p) => selectedTags.every((t) => p.tags?.includes(t))),
+    [projects, selectedTags]
+  );
+
+  function toggleTag(t) {
+    setSelectedTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+  }
 
   useEffect(() => {
     if (!projectsRef.current) return;
@@ -196,7 +215,7 @@ export default function Portfolio() {
             
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button href="#projects" icon={ExternalLink}>View My Work</Button>
+              <Button href="https://www.linkedin.com/in/sankalp-naik-ml/" icon={Linkedin}>Connect on LinkedIn</Button>
               <Button href={`/res/SankalpNaikResume.pdf`} variant="ghost" icon={Code2}>Download Resume</Button>
             </div>
 
@@ -342,20 +361,61 @@ export default function Portfolio() {
 
     {/* Projects */}
     <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
-      <h3 className="text-3xl font-bold mb-6">Projects</h3>
-  
-      <div ref={projectsRef} className="overflow-x-auto -mx-6 px-6 pb-4" aria-label="Projects carousel">
-        <div className="flex gap-6 w-max snap-x snap-mandatory items-stretch">
-          {projects.map((p) => (
-            <div key={p.title} className="snap-start flex-shrink-0 w-[20rem]">
-              {/* project-measure will be measured and sized to the max height */}
-              <div className="project-measure h-auto">
-                <ProjectCard p={p} />
-              </div>
-            </div>
-          ))}
+       <h3 className="text-3xl font-bold mb-6">Projects</h3>
+      
+      {/* Filters */}
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setFilterOpen((s) => !s)}
+            aria-expanded={filterOpen}
+            className="rounded-lg px-3 py-1 bg-white/5 border border-white/10 text-sm inline-flex items-center gap-2"
+          >
+            Filters
+            <ChevronDown size={14} className={`transform transition-transform ${filterOpen ? "rotate-180" : ""}`} />
+          </button>
+          <div className="text-sm text-white/70">{filteredProjects.length} projects</div>
         </div>
+        {selectedTags.length > 0 && (
+          <button className="text-sm text-rose-400" onClick={() => setSelectedTags([])}>
+            Clear
+          </button>
+        )}
       </div>
+
+      {filterOpen && (
+        <div className="mb-6 p-3 bg-white/2 rounded-lg border border-white/10">
+          <div className="flex flex-wrap gap-2">
+            {uniqueTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => toggleTag(tag)}
+                className={`rounded-full px-3 py-1 text-sm border ${
+                  selectedTags.includes(tag)
+                    ? "bg-indigo-600/20 border-indigo-400/40 text-indigo-300"
+                    : "bg-white/5 border-white/10 text-white/80"
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div ref={projectsRef} className="overflow-x-auto -mx-6 px-6 pb-4" aria-label="Projects carousel">
+         <div className="flex gap-6 w-max snap-x snap-mandatory items-stretch">
+          {filteredProjects.map((p) => (
+             <div key={p.title} className="snap-start flex-shrink-0 w-[20rem]">
+               {/* project-measure will be measured and sized to the max height */}
+               <div className="project-measure h-auto">
+                 <ProjectCard p={p} />
+               </div>
+             </div>
+           ))}
+         </div>
+       </div>
 
     </section>
         
