@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,6 +10,7 @@ import Image from "next/image";
 import FloatingParallaxCard from "@/components/FloatingParallaxCard";
 import dynamic from "next/dynamic";
 const HolidayCursor = dynamic(() => import("@/components/HolidayCursor"), { ssr: false });
+import Analytics from "@/components/Analytics";
 
 import projects from "@/data/projects.json";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -158,6 +160,7 @@ export default function Portfolio() {
 
   return (
     <div className="dark min-h-screen text-white bg-[#0b0d12] [--ring:theme(colors.indigo.400)]">
+      <Analytics />
       <HolidayCursor />
       {/* Top nav */}
       <header className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-[#0b0d12]/70">
