@@ -28,6 +28,8 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,8 +75,19 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+
+      # NOTE: NEXT_PUBLIC_GA_ID is provided via job env (see top of job). No conditional needed.
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
+      - name: Export with Next.js (static export to ./out)
+        run: ${{ steps.detect-package-manager.outputs.runner }} next export
+
+      # Ensure the static export contains our custom domain file
+      - name: Add CNAME
+        run: |
+          mkdir -p out
+          printf "sankalpnaik.me\n" > out/CNAME
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

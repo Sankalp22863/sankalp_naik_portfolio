@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,18 +35,8 @@ jobs:
       # ⬇️ Custom domain => empty base path
       - name: Set base path for custom domain
         run: echo "NEXT_PUBLIC_BASE_PATH=" >> $GITHUB_ENV
-      
-      # ⬇️ Read GA ID from repo secret (set NEXT_PUBLIC_GA_ID in repo Settings → Secrets)
-      - name: Set GA ID from secret
-        if: ${{ secrets.NEXT_PUBLIC_GA_ID }}
-        run: echo "NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}" >> $GITHUB_ENV
-      
 
-      # Optional: ensure CNAME is in the artifact (replace with your domain)
-      - name: Add CNAME
-        run: |
-          mkdir -p out
-          printf "sankalpnaik.me\n" > out/CNAME
+      # NOTE: NEXT_PUBLIC_GA_ID is provided via job env (see top of job). No step-level secret reference required.
 
       # Optional: set the repo name for project pages
       - name: Set REPO var
