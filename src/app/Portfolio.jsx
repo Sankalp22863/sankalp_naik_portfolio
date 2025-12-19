@@ -298,11 +298,17 @@ export default function Portfolio() {
     {/* Projects */}
     <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
       <h3 className="text-3xl font-bold mb-6">Projects</h3>
-      <div className="grid md:grid-cols-3 gap-6">
-        {projects.map((p) => (
-          <ProjectCard key={p.title} p={p} />
-        ))}
+
+      <div className="overflow-x-auto -mx-6 px-6 pb-4" aria-label="Projects carousel">
+        <div className="flex gap-6 w-max snap-x snap-mandatory">
+          {projects.map((p) => (
+            <div key={p.title} className="snap-start flex-shrink-0 w-[20rem]">
+              <ProjectCard p={p} />
+            </div>
+          ))}
+        </div>
       </div>
+
     </section>
         
 

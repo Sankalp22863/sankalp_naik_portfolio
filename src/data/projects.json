@@ -19,7 +19,7 @@
     "title": "Fault-Tolerant Distributed System",
     "img": "/res/distributed.svg",
     "desc": "A fault-tolerant distributed system implementing active and passive replication with failure detection and recovery components.",
-    "tags": ["Python", "Distributed Systems", "Fault Tolerance", "Replication", "Networking"],
+    "tags": ["Python", "Distributed Systems", "Fault Tolerance", "Replication"],
     "codeUrl": "https://github.com/Sankalp22863/DistributedSystem",
     "featured": true
   }, 
@@ -27,7 +27,7 @@
     "title": "Codesign Optimization Framework",
     "img": "/res/codesign.svg",
     "desc": "A co-design optimization framework for jointly optimizing system architecture and control parameters under performance and resource constraints.",
-    "tags": ["Python", "Co-Design", "Optimization", "Control Systems", "Algorithms"],
+    "tags": ["Python", "Co-Design", "Optimization", "Algorithms"],
     "codeUrl": "https://github.com/Sankalp22863/codesign-opt",
     "featured": true
   }
