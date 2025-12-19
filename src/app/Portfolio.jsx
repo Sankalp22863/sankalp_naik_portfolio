@@ -8,6 +8,8 @@ import { Typewriter } from 'react-simple-typewriter'
 import Image from "next/image";
 import FloatingParallaxCard from "@/components/FloatingParallaxCard";
 import dynamic from "next/dynamic";
+import projects from "@/data/projects.json";
+import { ProjectCard } from "@/components/ProjectCard";
 
 const Contributions = dynamic(() => import("@/components/Contributions"), {
   ssr: false, // render only on client to avoid hydration mismatch
@@ -293,35 +295,15 @@ export default function Portfolio() {
     </div>
   </section>
 
-        {/* Projects */}
-        <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
-          <h3 className="text-3xl font-bold mb-2">Featured Projects</h3>
-          <p className="text-white/70 mb-6">A selection of recent work showcasing applied ML and systems craft.</p>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                title: 'Intent Classifier',
-                img: '/res/NER.svg',
-                desc: 'Intent based smart navigation for complex financial systems.',
-                tags: ['Python','Flask','Named Entity Recognition'],
-              }
-            ].map((p) => (
-              <Card1 key={p.title} className="px-6 pb-6 pt-4">
-                <img src={p.img} alt="project" className="rounded-2xl mb-4 h-40 w-full object-cover" />
-                <h4 className="font-semibold text-lg">{p.title}</h4>
-                <p className="text-sm text-white/80 mt-1 mb-3">{p.desc}</p>
-                <div className="flex flex-wrap gap-2 mb-4">{p.tags.map(t => <Tag key={t}>{t}</Tag>)}</div>
-                <div className="flex gap-3">
-                  <Button href="#"><Code2 size={16}/>Code</Button>
-                  <Button href="#" variant="ghost" icon={ExternalLink}>Demo</Button>
-                </div>
-              </Card1>
-            ))}
-          </div>
-        </section>
-        <section id="contribution" className="mx-auto max-w-7xl px-6 py-12">
-            <Contributions />
-        </section>
+    {/* Projects */}
+    <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
+      <h3 className="text-3xl font-bold mb-6">Projects</h3>
+      <div className="grid md:grid-cols-3 gap-6">
+        {projects.map((p) => (
+          <ProjectCard key={p.title} p={p} />
+        ))}
+      </div>
+    </section>
         
 
       {/* Contact */}

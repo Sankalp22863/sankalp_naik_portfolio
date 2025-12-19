@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Intent Classifier",
+    "img": "/res/NER.svg",
+    "desc": "Intent based smart navigation for complex financial systems.",
+    "tags": ["Python", "Flask", "Named Entity Recognition"],
+    "codeUrl": "https://github.com/Sankalp22863/IntentClassification.git",
+    "featured": true
+  }
+]
