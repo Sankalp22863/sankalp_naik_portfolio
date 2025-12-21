@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu, ChevronDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import GitHubCalendar from "react-github-calendar";
 import { Card as Card1, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -97,11 +97,55 @@ const EXPERIENCE = [
   },
 ];
 
+// Centralized opportunities content
+const OPPORTUNITIES_CONTENT = {
+  title: "Looking for Internship opportunities for Summer 2026!",
+  roles: [
+    "Machine Learning Engineering roles focused on on-device inference, model optimization, and hardware-aware ML systems, where tight integration between algorithms, software, and silicon is critical.",
+    "Systems Engineering roles involving performance-critical software, accelerator/GPU optimization, and building reliable, scalable infrastructure that brings research ideas into production-quality systems."
+  ],
+  closingText: "Thank You!",
+  popupTitle: "Looking for Opportunities In",
+  popupRoles: [
+    "Machine Learning Engineering roles focused on on-device inference, model optimization, and hardware-aware ML systems—where I can bridge the gap between research and production-ready solutions.",
+    "Systems Engineering positions involving performance-critical software, GPU/accelerator optimization, and building robust infrastructure for AI/ML workloads at scale."
+  ]
+};
+
 export default function Portfolio() {
   const projectsRef = useRef(null);
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [heroTilt, setHeroTilt] = useState({ x: 0, y: 0 });
+  const [opportunitiesVisible, setOpportunitiesVisible] = useState(false);
+  const [opportunitiesProgress, setOpportunitiesProgress] = useState(0);
+
+  // Show after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setOpportunitiesVisible(true), 5000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Auto-dismiss after 10 seconds with progress bar
+  useEffect(() => {
+    if (!opportunitiesVisible) {
+      setOpportunitiesProgress(0);
+      return;
+    }
+    const total = 10000;
+    const start = Date.now();
+    const id = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const pct = Math.min(100, (elapsed / total) * 100);
+      setOpportunitiesProgress(pct);
+      if (elapsed >= total) {
+        clearInterval(id);
+        setOpportunitiesVisible(false);
+        setOpportunitiesProgress(0);
+      }
+    }, 100);
+    return () => clearInterval(id);
+  }, [opportunitiesVisible]);
 
   const uniqueTags = useMemo(
     () => Array.from(new Set(projects.flatMap((p) => p.tags || []))).sort(),
@@ -292,17 +336,12 @@ export default function Portfolio() {
           transition={{ duration: 0.6 }}
           className="rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl p-8 shadow-xl"
         >
-          <h3 className="text-2xl font-bold mb-4 text-center">Looking for Internship opportunities for Summer 2026!</h3>
+          <h3 className="text-2xl font-bold mb-4 text-center">{OPPORTUNITIES_CONTENT.title}</h3>
           <div className="max-w-3xl mx-auto space-y-3 text-white/80 text-center">
-            <p className="leading-relaxed">
-              Machine Learning Engineering roles focused on on-device inference, model optimization, and hardware-aware ML systems, where tight integration between algorithms, software, and silicon is critical.
-            </p>
-            <p className="leading-relaxed">
-              Systems Engineering roles involving performance-critical software, accelerator/GPU optimization, and building reliable, scalable infrastructure that brings research ideas into production-quality systems.
-            </p>
-            <p className="leading-relaxed">
-              Thank You!
-            </p>
+            {OPPORTUNITIES_CONTENT.roles.map((role, idx) => (
+              <p key={idx} className="leading-relaxed">{role}</p>
+            ))}
+            <p className="leading-relaxed">{OPPORTUNITIES_CONTENT.closingText}</p>
           </div>
         </motion.div>
       </section>
@@ -627,6 +666,79 @@ export default function Portfolio() {
         }
         @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
       `}</style>
+
+      {/* Opportunities Popup */}
+      <AnimatePresence>
+        {opportunitiesVisible && (
+          <motion.div
+            key="opportunities-modal"
+            className="fixed inset-0 z-[85] flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpportunitiesVisible(false)}
+          >
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-2xl rounded-3xl border border-white/15 bg-white/10 shadow-2xl text-white p-8"
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                transition: { type: "spring", stiffness: 180, damping: 18 },
+              }}
+              exit={{ scale: 0.9, y: 12, opacity: 0, transition: { duration: 0.18 } }}
+            >
+              <button
+                onClick={() => setOpportunitiesVisible(false)}
+                className="absolute top-3 right-3 text-white/70 hover:text-white text-2xl"
+                aria-label="Close"
+              >
+                ×
+              </button>
+
+              <div className="space-y-4 text-center">
+                <h2 className="text-3xl font-bold">{OPPORTUNITIES_CONTENT.title}</h2>
+                <div className="max-w-xl mx-auto space-y-3 text-white/80">
+                  {OPPORTUNITIES_CONTENT.roles.map((role, idx) => (
+                    <p key={idx} className="leading-relaxed">{role}</p>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-3 pt-4">
+                  <a
+                    href="/res/SankalpNaikResume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-400 transition-colors"
+                  >
+                    <Code2 size={16} />
+                    Download Resume
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/sankalp-naik-ml/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/20 transition-colors"
+                  >
+                    <Linkedin size={16} />
+                    Connect on LinkedIn
+                  </a>
+                </div>
+              </div>
+
+              {/* Progress bar */}
+              <div className="mt-6 h-1 w-full overflow-hidden rounded-full bg-white/15">
+                <div
+                  className="h-full bg-gradient-to-r from-indigo-400 to-purple-400 transition-[width] duration-100 ease-linear"
+                  style={{ width: `${opportunitiesProgress}%` }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
