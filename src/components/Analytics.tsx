@@ -12,8 +12,8 @@ export default function Analytics() {
   // keep dependency array stable (same length every render)
   useEffect(() => {
     if (!GA_ID) return;
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('config', GA_ID, { page_path: pathname });
+    if (typeof window !== 'undefined' && (window).gtag) {
+      (window).gtag('config', GA_ID, { page_path: pathname });
     }
   }, [pathname]); // stable length: 1
 
