@@ -79,8 +79,6 @@ jobs:
       # NOTE: NEXT_PUBLIC_GA_ID is provided via job env (see top of job). No conditional needed.
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-      - name: Export with Next.js (static export to ./out)
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
 
       # Ensure the static export contains our custom domain file
       - name: Add CNAME
