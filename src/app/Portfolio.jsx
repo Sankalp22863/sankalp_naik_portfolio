@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import GitHubCalendar from "react-github-calendar";
 import { Card as Card1, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
@@ -58,7 +59,7 @@ const Card = ({ children }) => (
 // --- Education & Experience ---
 const EDUCATION = [
   {
-    title: "M.S. (AIE – ECE)",
+    title: "M.S. (Artificial Intelligence – ECE)",
     org: "Carnegie Mellon University",
     years: "2025 – 2026",
     blurb:
@@ -68,7 +69,7 @@ const EDUCATION = [
   {
     title: "B.Tech (ECE)",
     org: "VNIT",
-    years: "2016 – 2020",
+    years: "2018 – 2022",
     blurb:
       "Top of class; coursework in Algorithms, Signals, VLSI, ML.",
     awards: "Visvesvaraya National Institute Medal",
@@ -80,7 +81,7 @@ const EXPERIENCE = [
   {
     title: "Associate Applications Developer",
     org: "Oracle Financial Services",
-    years: "2022 – Present",
+    years: "2022 – 2025",
     blurb:
       "Infra team for a banking platform; owned performance-critical components.",
     awards:"PaceSetter Award for exceptional performance at Oracle.",
@@ -157,6 +158,18 @@ export default function Portfolio() {
       observer.disconnect();
     };
   }, []);
+
+  // Mouse tilt for GitHub card
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const handleTilt = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = e.clientX - (rect.left + rect.width / 2);
+    const relY = e.clientY - (rect.top + rect.height / 2);
+    const rotateY = (relX / rect.width) * 12;  // left/right
+    const rotateX = -(relY / rect.height) * 12; // up/down
+    setTilt({ x: rotateX, y: rotateY });
+  };
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
     <div className="dark min-h-screen text-white bg-[#0b0d12] [--ring:theme(colors.indigo.400)]">
@@ -454,6 +467,60 @@ export default function Portfolio() {
             </form>
           </Card>
         </div>
+      </section>
+
+      {/* GitHub Contributions (before Footer) */}
+      <section id="contributions" className="mx-auto max-w-7xl px-6 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div
+            onMouseMove={handleTilt}
+            onMouseLeave={resetTilt}
+            style={{
+              transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+              transition: "transform 180ms ease-out",
+            }}
+            className="relative rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl p-10 shadow-2xl overflow-hidden"
+          >
+            {/* Gradient glow */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-indigo-500/12 via-transparent to-purple-500/12" />
+
+            <div className="relative z-10 flex flex-col items-center gap-8">
+              <h3 className="text-3xl font-bold text-center">GitHub Contributions</h3>
+
+              <div className="w-full flex justify-center">
+                <div className="inline-block">
+                  <GitHubCalendar
+                    username="Sankalp22863"
+                    blockSize={12}
+                    blockMargin={4}
+                    fontSize={14}
+                    colorScheme="dark"
+                    theme={{
+                      dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+                    }}
+                  />
+                </div>
+              </div>
+
+              <Button
+                href="https://github.com/Sankalp22863"
+                icon={Github}
+                variant="primary"
+              >
+                View GitHub Profile
+              </Button>
+            </div>
+
+            {/* Ambient blur orbs */}
+            <div className="absolute top-4 right-4 w-28 h-28 bg-indigo-500/15 rounded-full blur-3xl" />
+            <div className="absolute bottom-4 left-4 w-28 h-28 bg-purple-500/15 rounded-full blur-3xl" />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Footer */}
