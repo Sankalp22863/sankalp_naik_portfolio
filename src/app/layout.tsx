@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { Suspense } from "react";
 import GtagPageView from "./_components/GtagPageView";
 
 const geistSans = Geist({
@@ -22,14 +23,14 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID; // e.g. G-XXXXXXX
+  const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
 
-        {/* Google Analytics (only loads if an ID is set) */}
+        {/* Google Analytics */}
         {gaId && (
           <>
             <Script
@@ -44,11 +45,11 @@ export default function RootLayout({
                 gtag('config', '${gaId}', { page_path: window.location.pathname });
               `}
             </Script>
+            <Suspense fallback={null}>
+              <GtagPageView />
+            </Suspense>
           </>
         )}
-
-        {/* Fire page_view on client-side route changes */}
-        {gaId && <GtagPageView />}
       </body>
     </html>
   );
