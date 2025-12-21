@@ -283,7 +283,31 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Skills */}
+      {/* Opportunities Section */}
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl p-8 shadow-xl"
+        >
+          <h3 className="text-2xl font-bold mb-4 text-center">Looking for Internship opportunities for Summer 2026!</h3>
+          <div className="max-w-3xl mx-auto space-y-3 text-white/80 text-center">
+            <p className="leading-relaxed">
+              Machine Learning Engineering roles focused on on-device inference, model optimization, and hardware-aware ML systems, where tight integration between algorithms, software, and silicon is critical.
+            </p>
+            <p className="leading-relaxed">
+              Systems Engineering roles involving performance-critical software, accelerator/GPU optimization, and building reliable, scalable infrastructure that brings research ideas into production-quality systems.
+            </p>
+            <p className="leading-relaxed">
+              Thank You!
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Skills Section */}
       <section id="skills" className="mx-auto max-w-7xl px-6 py-12">
         <h3 className="text-3xl font-bold mb-6">Skills</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
