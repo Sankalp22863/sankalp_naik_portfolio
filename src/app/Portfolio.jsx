@@ -288,27 +288,27 @@ export default function Portfolio() {
         <h3 className="text-3xl font-bold mb-6">Skills</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Card>
-            <div className="flex items-center gap-3 mb-3"><Cpu className="opacity-80" /><h4 className="font-semibold">ML / AI</h4></div>
+            <div className="flex items-center gap-3 mb-3"><Cpu className="opacity-80" /><h4 className="font-semibold">On Device and Applied ML</h4></div>
             <div className="flex flex-wrap gap-2">
-              {['PyTorch','TensorFlow','Transformers','Scikit‑learn','RL','Computer Vision'].map(t=> <Tag key={t}>{t}</Tag>)}
+              {['PyTorch','JAX','Core ML','Classic ML','LLM Benchmarking'].map(t=> <Tag key={t}>{t}</Tag>)}
             </div>
           </Card>
           <Card>
-            <div className="flex items-center gap-3 mb-3"><Code2 className="opacity-80" /><h4 className="font-semibold">Systems</h4></div>
+            <div className="flex items-center gap-3 mb-3"><Code2 className="opacity-80" /><h4 className="font-semibold">Performance Critical Systems</h4></div>
             <div className="flex flex-wrap gap-2">
-              {['Python','C++','FastAPI','Docker','Kubernetes','MLOps'].map(t=> <Tag key={t}>{t}</Tag>)}
+              {['C/C++(Performace Level Code)', "Java(JAX-RS)", 'Profiling and Debugging','CMAKE','LLVM/MLIR'].map(t=> <Tag key={t}>{t}</Tag>)}
             </div>
           </Card>
           <Card>
-            <div className="flex items-center gap-3 mb-3"><Cpu className="opacity-80" /><h4 className="font-semibold">Hardware</h4></div>
+            <div className="flex items-center gap-3 mb-3"><Cpu className="opacity-80" /><h4 className="font-semibold">Silicon Aware Computing</h4></div>
             <div className="flex flex-wrap gap-2">
-              {['Raspberry Pi','CUDA','ONNX','Vitis HLS','Verilog (basics)'].map(t=> <Tag key={t}>{t}</Tag>)}
+              {['Computer Architecture','CUDA','ARM64/Apple Silicon','Hardware Software Codesign'].map(t=> <Tag key={t}>{t}</Tag>)}
             </div>
           </Card>
           <Card>
-            <div className="flex items-center gap-3 mb-3"><Code2 className="opacity-80" /><h4 className="font-semibold">Cloud</h4></div>
+            <div className="flex items-center gap-3 mb-3"><Code2 className="opacity-80" /><h4 className="font-semibold">Infrastructure and Reliability</h4></div>
             <div className="flex flex-wrap gap-2">
-              {['AWS','GCP','CI/CD','Metrics','Tracing'].map(t=> <Tag key={t}>{t}</Tag>)}
+              {['Benchmarking','Observability','Distributed Systems Fundamentals','Fault Tolerance'].map(t=> <Tag key={t}>{t}</Tag>)}
             </div>
           </Card>
         </div>
