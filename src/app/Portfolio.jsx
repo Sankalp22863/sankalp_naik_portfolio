@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code2, Cpu, ChevronDown } from "lucide-react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { Card as Card1, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award } from "lucide-react";
@@ -11,14 +11,15 @@ import FloatingParallaxCard from "@/components/FloatingParallaxCard";
 import dynamic from "next/dynamic";
 const HolidayCursor = dynamic(() => import("@/components/HolidayCursor"), { ssr: false });
 import Analytics from "@/components/Analytics";
-import GitHubCalendar from 'react-github-calendar';
 
 import projects from "@/data/projects.json";
 import { ProjectCard } from "@/components/ProjectCard";
 
 const Contributions = dynamic(() => import("@/components/Contributions"), {
-  ssr: false,
+  ssr: false, // render only on client to avoid hydration mismatch
 });
+
+
 
 
 /**
@@ -67,7 +68,7 @@ const EDUCATION = [
   {
     title: "B.Tech (ECE)",
     org: "VNIT",
-    years: "2018 – 2022",
+    years: "2016 – 2020",
     blurb:
       "Top of class; coursework in Algorithms, Signals, VLSI, ML.",
     awards: "Visvesvaraya National Institute Medal",
@@ -79,7 +80,7 @@ const EXPERIENCE = [
   {
     title: "Associate Applications Developer",
     org: "Oracle Financial Services",
-    years: "2022 – 2025",
+    years: "2022 – Present",
     blurb:
       "Infra team for a banking platform; owned performance-critical components.",
     awards:"PaceSetter Award for exceptional performance at Oracle.",
@@ -157,40 +158,10 @@ export default function Portfolio() {
     };
   }, []);
 
-  // Mouse tracking for GitHub section
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springConfig = { damping: 25, stiffness: 150 };
-  const rotateX = useSpring(useMotionValue(0), springConfig);
-  const rotateY = useSpring(useMotionValue(0), springConfig);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const mouseXPos = e.clientX - centerX;
-    const mouseYPos = e.clientY - centerY;
-    
-    // Calculate rotation (-10 to 10 degrees)
-    const rotateXValue = (mouseYPos / rect.height) * -10;
-    const rotateYValue = (mouseXPos / rect.width) * 10;
-    
-    rotateX.set(rotateXValue);
-    rotateY.set(rotateYValue);
-  };
-
-  const handleMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-  };
-
   return (
     <div className="dark min-h-screen text-white bg-[#0b0d12] [--ring:theme(colors.indigo.400)]">
       <Analytics />
       <HolidayCursor />
-      
       {/* Top nav */}
       <header className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-[#0b0d12]/70">
         <nav className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
@@ -483,64 +454,6 @@ export default function Portfolio() {
             </form>
           </Card>
         </div>
-      </section>
-
-      {/* GitHub Contributions Section - Before Footer */}
-      <section id="contributions" className="mx-auto max-w-7xl px-6 py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.div 
-            className="relative rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl p-12 shadow-2xl overflow-hidden"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
-              rotateX,
-              rotateY,
-              transformStyle: "preserve-3d",
-            }}
-          >
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 pointer-events-none" />
-            
-            {/* Content */}
-            <div className="relative z-10 flex flex-col items-center" style={{ transform: "translateZ(50px)" }}>
-              <h3 className="text-3xl font-bold mb-12 text-center">GitHub Contributions</h3>
-              
-              <div className="w-full flex justify-center">
-                <div className="inline-block">
-                  <GitHubCalendar 
-                    username="sankalp22863" 
-                    blockSize={12}
-                    blockMargin={4}
-                    fontSize={14}
-                    colorScheme="dark"
-                    theme={{
-                      dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-                    }}
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-8 flex items-center gap-4">
-                <Button 
-                  href="https://github.com/sankalp22863" 
-                  icon={Github}
-                  variant="primary"
-                >
-                  View GitHub Profile
-                </Button>
-              </div>
-            </div>
-            
-            {/* Decorative elements */}
-            <div className="absolute top-4 right-4 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-4 left-4 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl" />
-          </motion.div>
-        </motion.div>
       </section>
 
       {/* Footer */}
