@@ -434,42 +434,8 @@ export default function Portfolio() {
        </div>
 
     </section>
-        
 
-      {/* Contact */}
-      <section id="contact" className="mx-auto max-w-7xl px-6 py-12">
-        <h3 className="text-3xl font-bold mb-6">Get In Touch</h3>
-        <div className="grid md:grid-cols-2 gap-6 items-start">
-          <Card>
-            <div className="space-y-4">
-              <div className="flex items-center gap-3"><Mail className="opacity-80"/><div><div className="text-white">sgnaik@andrew.cmu.edu</div><div className="text-white/70 text-sm">Email</div></div></div>
-              <div className="flex items-center gap-3"><Phone className="opacity-80"/><div><div className="text-white">+1 (412) 608-7192</div><div className="text-white/70 text-sm">Phone</div></div></div>
-              <div className="flex items-center gap-3"><MapPin className="opacity-80"/><div><div className="text-white">Pittsburgh, PA</div><div className="text-white/70 text-sm">Location</div></div></div>
-              <div className="flex items-center gap-4 pt-2">
-                <a href="https://github.com/Sankalp22863" className="hover:text-white text-white/80"><Github/></a>
-                <a href="https://www.linkedin.com/in/sankalpnaik/" className="hover:text-white text-white/80"><Linkedin/></a>
-                <a href="mailto:sgnaik@andrew.cmu.edu" className="hover:text-white text-white/80"><Mail/></a>
-              </div>
-            </div>
-          </Card>
-          <Card>
-            <form className="grid gap-3">
-              <div className="grid grid-cols-2 gap-3">
-                <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="First Name" />
-                <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Last Name" />
-              </div>
-              <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Email" />
-              <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Subject" />
-              <textarea rows={5} className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Tell me about the opportunity..." />
-              <div>
-                <Button icon={Mail}>Send Message</Button>
-              </div>
-            </form>
-          </Card>
-        </div>
-      </section>
-
-      {/* GitHub Contributions (before Footer) */}
+    {/* GitHub Contributions (before Footer) */}
       <section id="contributions" className="mx-auto max-w-7xl px-6 py-16">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -521,6 +487,40 @@ export default function Portfolio() {
             <div className="absolute bottom-4 left-4 w-28 h-28 bg-purple-500/15 rounded-full blur-3xl" />
           </motion.div>
         </motion.div>
+      </section>
+        
+
+      {/* Contact */}
+      <section id="contact" className="mx-auto max-w-7xl px-6 py-12">
+        <h3 className="text-3xl font-bold mb-6">Get In Touch</h3>
+        <div className="grid md:grid-cols-2 gap-6 items-start">
+          <Card>
+            <div className="space-y-4">
+              <div className="flex items-center gap-3"><Mail className="opacity-80"/><div><div className="text-white">sgnaik@andrew.cmu.edu</div><div className="text-white/70 text-sm">Email</div></div></div>
+              <div className="flex items-center gap-3"><Phone className="opacity-80"/><div><div className="text-white">+1 (412) 608-7192</div><div className="text-white/70 text-sm">Phone</div></div></div>
+              <div className="flex items-center gap-3"><MapPin className="opacity-80"/><div><div className="text-white">Pittsburgh, PA</div><div className="text-white/70 text-sm">Location</div></div></div>
+              <div className="flex items-center gap-4 pt-2">
+                <a href="https://github.com/Sankalp22863" className="hover:text-white text-white/80"><Github/></a>
+                <a href="https://www.linkedin.com/in/sankalpnaik/" className="hover:text-white text-white/80"><Linkedin/></a>
+                <a href="mailto:sgnaik@andrew.cmu.edu" className="hover:text-white text-white/80"><Mail/></a>
+              </div>
+            </div>
+          </Card>
+          <Card>
+            <form className="grid gap-3">
+              <div className="grid grid-cols-2 gap-3">
+                <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="First Name" />
+                <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Last Name" />
+              </div>
+              <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Email" />
+              <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Subject" />
+              <textarea rows={5} className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Tell me about the opportunity..." />
+              <div>
+                <Button icon={Mail}>Send Message</Button>
+              </div>
+            </form>
+          </Card>
+        </div>
       </section>
 
       {/* Footer */}
