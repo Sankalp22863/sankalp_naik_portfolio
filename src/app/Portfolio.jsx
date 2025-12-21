@@ -101,6 +101,7 @@ export default function Portfolio() {
   const projectsRef = useRef(null);
   const [filterOpen, setFilterOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [heroTilt, setHeroTilt] = useState({ x: 0, y: 0 });
 
   const uniqueTags = useMemo(
     () => Array.from(new Set(projects.flatMap((p) => p.tags || []))).sort(),
@@ -158,6 +159,16 @@ export default function Portfolio() {
       observer.disconnect();
     };
   }, []);
+
+  const handleHeroTilt = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = e.clientX - (rect.left + rect.width / 2);
+    const relY = e.clientY - (rect.top + rect.height / 2);
+    const rotateY = (relX / rect.width) * 12;    // left/right
+    const rotateX = -(relY / rect.height) * 12;  // up/down
+    setHeroTilt({ x: rotateX, y: rotateY });
+  };
+  const resetHeroTilt = () => setHeroTilt({ x: 0, y: 0 });
 
   // Mouse tilt for GitHub card
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -247,14 +258,20 @@ export default function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            onMouseMove={handleHeroTilt}
+            onMouseLeave={resetHeroTilt}
+            style={{
+              transform: `perspective(1200px) rotateX(${heroTilt.x}deg) rotateY(${heroTilt.y}deg)`,
+              transition: "transform 180ms ease-out",
+            }}
             className="rounded-[28px] overflow-hidden border border-white/15 bg-white/5 backdrop-blur shadow-2xl"
           >
            
             <FloatingParallaxCard
-              src="/res/SankalpNaik-removebg-preview.png"   // your image
+              src="/res/SankalpNaik-removebg-preview.png"
               alt="Profile"
-              fill                      // fills the parent div
-              className="object-cover"  // scales + crops to fit
+              fill
+              className="object-cover"
             />
 
             {/* <img
@@ -507,18 +524,39 @@ export default function Portfolio() {
             </div>
           </Card>
           <Card>
-            <form className="grid gap-3">
-              <div className="grid grid-cols-2 gap-3">
-                <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="First Name" />
-                <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Last Name" />
-              </div>
-              <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Email" />
-              <input className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Subject" />
-              <textarea rows={5} className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Tell me about the opportunity..." />
-              <div>
-                <Button icon={Mail}>Send Message</Button>
-              </div>
-            </form>
+            <form
+  className="grid gap-3"
+  onSubmit={(e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const first = form.firstName.value.trim();
+    const last = form.lastName.value.trim();
+    const email = form.email.value.trim();
+    const subj = form.subject.value.trim() || "Contact from portfolio";
+    const msg = form.message.value.trim();
+
+    const body = encodeURIComponent(
+      `Name: ${first} ${last}\nEmail: ${email}\n\n${msg}`
+    );
+
+    window.location.href = `mailto:sgnaik@andrew.cmu.edu?subject=${encodeURIComponent(
+      subj
+    )}&body=${body}`;
+  }}
+>
+  <div className="grid grid-cols-2 gap-3">
+    <input name="firstName" className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="First Name" />
+    <input name="lastName" className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Last Name" />
+  </div>
+  <input name="email" required className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Email" />
+  <input name="subject" className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Subject" />
+  <textarea name="message" required rows={5} className="rounded-xl bg-white/5 border border-white/15 px-3 py-2" placeholder="Tell me about the opportunity..." />
+  <div>
+    <button type="submit" className="inline-flex items-center gap-2 rounded-xl bg-indigo-500 text-white px-4 py-2">
+      Send Message
+    </button>
+  </div>
+</form>
           </Card>
         </div>
       </section>
