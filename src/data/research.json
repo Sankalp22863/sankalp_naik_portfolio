@@ -7,7 +7,6 @@
     "abstract": "Proposed an ARIMA-based (Auto Regressive Integrated Moving Average) technique, to substitute the Harmonic Mean predictive algorithm used in the original Model Predictive Control scheme to determine the best possible bitrate for the given network conditions. Mathematically demonstrated that the proposed model provides us with improvements in the prediction of optimal bitrate for given bandwidth and buffer capacity within computational constraints of practical implementation. Analyzed and compared various methods, including deep learning techniques, to improve adaptive bitrate schemes for improved Quality of Experience (QoE) in video streaming.",
     "tags": ["Adaptive Bitrate", "Video Streaming", "ARIMA", "Model Predictive Control", "QoE"],
     "link": "https://ieeexplore.ieee.org/document/9807874",
-    "pdfLink": "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9807874",
     "status": "Published",
     "featured": false
   },
@@ -19,7 +18,6 @@
     "abstract": "Prepared a Custom dataset of Hinglish YouTube Comments by web scraping & designing a comprehensive annotation scheme, considering various dimensions such as sentiment, topic, toxicity, and engagement. Leveraged robust ML classification models and NLP techniques to accurately capture the sentiment of Hinglish comments and identify abusive comments. Introduced the concept of Gravity of comments which will act as a reward mechanism for comments based on the computed sentiment and help YouTube reorder the display order of comments.",
     "tags": ["Machine Learning", "NLP", "YouTube Comments", "Sentiment Analysis", "Custom Dataset"],
     "link": "https://ieeexplore.ieee.org/document/10235049",
-    "pdfLink": "https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10235049",
     "status": "Published", 
     "featured": false
   }
