@@ -15,6 +15,8 @@ import Analytics from "@/components/Analytics";
 
 import projects from "@/data/projects.json";
 import { ProjectCard } from "@/components/ProjectCard";
+import articles from "@/data/articles.json";
+import { ArticleCard } from "@/components/ArticleCard";
 
 const Contributions = dynamic(() => import("@/components/Contributions"), {
   ssr: false, // render only on client to avoid hydration mismatch
@@ -515,7 +517,28 @@ export default function Portfolio() {
 
     </section>
 
-    {/* GitHub Contributions (before Footer) */}
+    {/* Medium Articles Section */}
+      <section id="articles" className="mx-auto max-w-7xl px-6 py-12">
+        <h3 className="text-3xl font-bold mb-6">Tech Reads</h3>
+        
+        <div className="mb-4 flex items-center justify-between">
+          <div className="text-sm text-white/70">{articles.length} articles</div>
+        </div>
+
+        <div className="overflow-x-auto -mx-6 px-6 pb-4" aria-label="Articles carousel">
+          <div className="flex gap-6 w-max snap-x snap-mandatory items-stretch">
+            {articles.map((article) => (
+              <div key={article.title} className="snap-start flex-shrink-0 w-[20rem]">
+                <div className="h-auto">
+                  <ArticleCard article={article} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GitHub Contributions (before Footer) */}
       <section id="contributions" className="mx-auto max-w-7xl px-6 py-16">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -581,7 +604,7 @@ export default function Portfolio() {
               <div className="flex items-center gap-3"><MapPin className="opacity-80"/><div><div className="text-white">Pittsburgh, PA</div><div className="text-white/70 text-sm">Location</div></div></div>
               <div className="flex items-center gap-4 pt-2">
                 <a href="https://github.com/Sankalp22863" className="hover:text-white text-white/80"><Github/></a>
-                <a href="https://www.linkedin.com/in/sankalpnaik/" className="hover:text-white text-white/80"><Linkedin/></a>
+                <a href="https://www.linkedin.com/in/sankalp-naik-ml/" className="hover:text-white text-white/80"><Linkedin/></a>
                 <a href="mailto:sgnaik@andrew.cmu.edu" className="hover:text-white text-white/80"><Mail/></a>
               </div>
             </div>
@@ -630,11 +653,6 @@ export default function Portfolio() {
           <div>
             <div className="font-semibold">Sankalp Naik</div>
             <p className="text-white/70 mt-2">AI/ML engineer passionate about creating intelligent systems that make a positive impact.</p>
-            <div className="flex items-center gap-4 mt-3 text-white/80">
-              <Github/>
-              <Linkedin/>
-              <Mail/>
-            </div>
           </div>
           <div>
             <div className="font-semibold mb-2">Quick Links</div>
