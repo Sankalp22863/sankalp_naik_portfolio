@@ -17,6 +17,8 @@ import projects from "@/data/projects.json";
 import { ProjectCard } from "@/components/ProjectCard";
 import articles from "@/data/articles.json";
 import { ArticleCard } from "@/components/ArticleCard";
+import research from "@/data/research.json";
+import { ResearchCard } from "@/components/ResearchCard";
 
 const Contributions = dynamic(() => import("@/components/Contributions"), {
   ssr: false, // render only on client to avoid hydration mismatch
@@ -240,7 +242,9 @@ export default function Portfolio() {
             {[
               ["Home", "#home"],
               ["Skills", "#skills"],
+              ["Research", "#research"],
               ["Projects", "#projects"],
+              ["Articles", "#articles"],
               ["Experience", "#experience"],
               ["Contact", "#contact"],
             ].map(([label, href]) => (
@@ -379,86 +383,28 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Experience*/}
+      {/* Research Papers Section */}
+      <section id="research" className="mx-auto max-w-7xl px-6 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-3xl font-bold">Research & Publications</h3>
+            <div className="text-sm text-white/70">{research.length} papers</div>
+          </div>
 
-      
-      <section id='experience' className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Left: Education */}
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Education</h3>
-            <div className="space-y-6">
-              {EDUCATION.map((item) => (
-                <Card1 key={item.title} className="rounded-2xl border-border/60">
-                  <CardHeader>
-                    <CardTitle className="text-lg">{item.title}</CardTitle>
-                    <CardDescription>
-                      {item.org} • {item.years}
-                      {/* Award Highlight */}
-                      {item.awards && (
-                        <div className="mt-4 flex items-center gap-2 text-amber-400">
-                        <Award className="h-5 w-5" />
-                        <span className="font-medium">{item.awards}</span>
-                      </div>
-                      )}
-                      
-              </CardDescription>
-              
-            </CardHeader>
-            
-            <CardContent className="text-muted-foreground">
-              <p className="mb-3">{item.blurb}</p>
-              <div className="flex flex-wrap gap-2">
-                {item.tags.map((t) => (
-                  <Badge key={t} variant="outline" className="backdrop-blur bg-white/5 border-white/10">
-                    {t}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card1>
-        ))}
-      </div>
-    </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {research.map((paper) => (
+              <ResearchCard key={paper.title} paper={paper} />
+            ))}
+          </div>
+        </motion.div>
+      </section>
 
-    {/* Right: Experience */}
-      <div>
-        <h3 className="text-xl font-semibold mb-4">Experience</h3>
-        <div className="space-y-6">
-          {EXPERIENCE.map((item) => (
-            <Card key={item.title} className="rounded-2xl border-border/60">
-              <CardHeader>
-                <CardTitle className="text-lg">{item.title}</CardTitle>
-                <CardDescription>
-                  {item.org} • {item.years}
-                  {/* Award Highlight */}
-                  {item.awards && (
-                    <div className="mt-4 flex items-center gap-2 text-amber-400">
-                    <Award className="h-5 w-5" />
-                    <span className="font-medium">{item.awards}</span>
-                  </div>
-                  )}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="text-muted-foreground">
-                <p className="mb-3">{item.blurb}</p>
-                <div className="flex flex-wrap gap-2">
-                  {item.tags.map((t) => (
-                    <Badge key={t} variant="outline" className="backdrop-blur bg-white/5 border-white/10">
-                      {t}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-    {/* Projects */}
-    <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
+      {/* Projects Section */}
+      <section id="projects" className="mx-auto max-w-7xl px-6 py-12">
        <h3 className="text-3xl font-bold mb-6">Projects</h3>
       
       {/* Filters */}
@@ -658,8 +604,10 @@ export default function Portfolio() {
             <div className="font-semibold mb-2">Quick Links</div>
             <ul className="space-y-1 text-white/80">
               <li><a href="#skills" className="hover:text-white">Skills</a></li>
+              <li><a href="#research" className="hover:text-white">Research</a></li>
               <li><a href="#projects" className="hover:text-white">Projects</a></li>
-              <a href="#contributions"  className="hover:text-white">Contributions</a>    
+              <li><a href="#articles" className="hover:text-white">Articles</a></li>
+              <li><a href="#contributions" className="hover:text-white">Contributions</a></li>
               <li><a href="#experience" className="hover:text-white">Experience</a></li>
               <li><a href="#contact" className="hover:text-white">Contact</a></li>
             </ul>
