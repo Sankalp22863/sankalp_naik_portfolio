@@ -206,4 +206,4 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-Made with ❤️ and lots of coffee.
+Made with ❤️, help from copilot and lots of coffee.
