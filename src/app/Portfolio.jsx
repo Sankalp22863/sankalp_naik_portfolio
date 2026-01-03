@@ -123,6 +123,10 @@ export default function Portfolio() {
   const [heroTilt, setHeroTilt] = useState({ x: 0, y: 0 });
   const [opportunitiesVisible, setOpportunitiesVisible] = useState(false);
   const [opportunitiesProgress, setOpportunitiesProgress] = useState(0);
+  
+  // Add state for experience/education card tilts
+  const [expTilts, setExpTilts] = useState({});
+  const [eduTilts, setEduTilts] = useState({});
 
   // Show after 5 seconds
   useEffect(() => {
@@ -229,6 +233,32 @@ export default function Portfolio() {
     setTilt({ x: rotateX, y: rotateY });
   };
   const resetTilt = () => setTilt({ x: 0, y: 0 });
+
+  // Handlers for experience cards
+  const handleExpTilt = (key, e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = e.clientX - (rect.left + rect.width / 2);
+    const relY = e.clientY - (rect.top + rect.height / 2);
+    const rotateY = (relX / rect.width) * 12;
+    const rotateX = -(relY / rect.height) * 12;
+    setExpTilts((prev) => ({ ...prev, [key]: { x: rotateX, y: rotateY } }));
+  };
+  const resetExpTilt = (key) => {
+    setExpTilts((prev) => ({ ...prev, [key]: { x: 0, y: 0 } }));
+  };
+
+  // Handlers for education cards
+  const handleEduTilt = (key, e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const relX = e.clientX - (rect.left + rect.width / 2);
+    const relY = e.clientY - (rect.top + rect.height / 2);
+    const rotateY = (relX / rect.width) * 12;
+    const rotateX = -(relY / rect.height) * 12;
+    setEduTilts((prev) => ({ ...prev, [key]: { x: rotateX, y: rotateY } }));
+  };
+  const resetEduTilt = (key) => {
+    setEduTilts((prev) => ({ ...prev, [key]: { x: 0, y: 0 } }));
+  };
 
   return (
     <div className="dark min-h-screen text-white bg-[#0b0d12] [--ring:theme(colors.indigo.400)]">
@@ -373,33 +403,39 @@ export default function Portfolio() {
           <div>
             <h4 className="text-xl font-semibold mb-4 text-white/90">Experience</h4>
             <div className="space-y-4">
-              {EXPERIENCE.map((exp) => (
-                <motion.div
-                  key={exp.title}
-                  whileHover={{ 
-                    rotate: [0, -1, 1, -1, 1, 0],
-                    transition: { duration: 0.5 }
-                  }}
-                >
-                  <Card>
-                    <div className="flex justify-between items-start mb-2">
-                      <h5 className="font-semibold text-lg">{exp.title}</h5>
-                      <span className="text-xs text-white/60 whitespace-nowrap ml-2">{exp.years}</span>
-                    </div>
-                    <div className="text-sm text-white/70 mb-2">{exp.org}</div>
-                    <p className="text-white/80 text-sm mb-3">{exp.blurb}</p>
-                    {exp.awards && (
-                      <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                        <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-xs text-amber-200/90">{exp.awards}</span>
+              {EXPERIENCE.map((exp, idx) => {
+                const key = `exp-${idx}`;
+                const tiltState = expTilts[key] || { x: 0, y: 0 };
+                return (
+                  <motion.div
+                    key={exp.title}
+                    onMouseMove={(e) => handleExpTilt(key, e)}
+                    onMouseLeave={() => resetExpTilt(key)}
+                    style={{
+                      transform: `perspective(1200px) rotateX(${tiltState.x}deg) rotateY(${tiltState.y}deg)`,
+                      transition: "transform 180ms ease-out",
+                    }}
+                  >
+                    <Card>
+                      <div className="flex justify-between items-start mb-2">
+                        <h5 className="font-semibold text-lg">{exp.title}</h5>
+                        <span className="text-xs text-white/60 whitespace-nowrap ml-2">{exp.years}</span>
                       </div>
-                    )}
-                    <div className="flex flex-wrap gap-2">
-                      {exp.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                      <div className="text-sm text-white/70 mb-2">{exp.org}</div>
+                      <p className="text-white/80 text-sm mb-3">{exp.blurb}</p>
+                      {exp.awards && (
+                        <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                          <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-xs text-amber-200/90">{exp.awards}</span>
+                        </div>
+                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {exp.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                      </div>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 
@@ -407,33 +443,39 @@ export default function Portfolio() {
           <div>
             <h4 className="text-xl font-semibold mb-4 text-white/90">Education</h4>
             <div className="space-y-4">
-              {EDUCATION.map((edu) => (
-                <motion.div
-                  key={edu.title}
-                  whileHover={{ 
-                    rotate: [0, -1, 1, -1, 1, 0],
-                    transition: { duration: 0.5 }
-                  }}
-                >
-                  <Card>
-                    <div className="flex justify-between items-start mb-2">
-                      <h5 className="font-semibold text-lg">{edu.title}</h5>
-                      <span className="text-xs text-white/60 whitespace-nowrap ml-2">{edu.years}</span>
-                    </div>
-                    <div className="text-sm text-white/70 mb-2">{edu.org}</div>
-                    <p className="text-white/80 text-sm mb-3">{edu.blurb}</p>
-                    {edu.awards && (
-                      <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                        <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-xs text-amber-200/90">{edu.awards}</span>
+              {EDUCATION.map((edu, idx) => {
+                const key = `edu-${idx}`;
+                const tiltState = eduTilts[key] || { x: 0, y: 0 };
+                return (
+                  <motion.div
+                    key={edu.title}
+                    onMouseMove={(e) => handleEduTilt(key, e)}
+                    onMouseLeave={() => resetEduTilt(key)}
+                    style={{
+                      transform: `perspective(1200px) rotateX(${tiltState.x}deg) rotateY(${tiltState.y}deg)`,
+                      transition: "transform 180ms ease-out",
+                    }}
+                  >
+                    <Card>
+                      <div className="flex justify-between items-start mb-2">
+                        <h5 className="font-semibold text-lg">{edu.title}</h5>
+                        <span className="text-xs text-white/60 whitespace-nowrap ml-2">{edu.years}</span>
                       </div>
-                    )}
-                    <div className="flex flex-wrap gap-2">
-                      {edu.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                      <div className="text-sm text-white/70 mb-2">{edu.org}</div>
+                      <p className="text-white/80 text-sm mb-3">{edu.blurb}</p>
+                      {edu.awards && (
+                        <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                          <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-xs text-amber-200/90">{edu.awards}</span>
+                        </div>
+                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {edu.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                      </div>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>
