@@ -333,25 +333,6 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Opportunities Section */}
-      <section className="mx-auto max-w-7xl px-6 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl p-8 shadow-xl"
-        >
-          <h3 className="text-2xl font-bold mb-4 text-center">{OPPORTUNITIES_CONTENT.title}</h3>
-          <div className="max-w-3xl mx-auto space-y-3 text-white/80 text-center">
-            {OPPORTUNITIES_CONTENT.roles.map((role, idx) => (
-              <p key={idx} className="leading-relaxed">{role}</p>
-            ))}
-            <p className="leading-relaxed">{OPPORTUNITIES_CONTENT.closingText}</p>
-          </div>
-        </motion.div>
-      </section>
-
       {/* Skills Section */}
       <section id="skills" className="mx-auto max-w-7xl px-6 py-12">
         <h3 className="text-3xl font-bold mb-6">Skills</h3>
