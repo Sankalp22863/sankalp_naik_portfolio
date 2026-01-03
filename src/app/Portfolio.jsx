@@ -265,20 +265,26 @@ export default function Portfolio() {
       <Analytics />
       <HolidayCursor />
       {/* Top nav */}
-      <header className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-[#0b0d12]/70">
-        <nav className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
-          <a className="font-semibold tracking-tight text-white/90">Sankalp Naik</a>
-          <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
+      <header className="sticky top-0 z-40 backdrop-blur-md border-b border-white/10 bg-black/50">
+        <nav className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
+          <a href="#home" className="font-semibold tracking-tight text-white/90 hover:text-white transition-colors">
+            Sankalp Naik
+          </a>
+          <div className="hidden md:flex items-center gap-6 text-sm text-white/70">
             {[
               ["Home", "#home"],
               ["Skills", "#skills"],
+              ["Experience", "#experience"],
               ["Research", "#research"],
               ["Projects", "#projects"],
               ["Articles", "#articles"],
-              ["Experience", "#experience"],
               ["Contact", "#contact"],
             ].map(([label, href]) => (
-              <a key={label} href={href} className="hover:text-white transition-colors">
+              <a 
+                key={label} 
+                href={href} 
+                className="hover:text-white transition-colors py-1"
+              >
                 {label}
               </a>
             ))}
@@ -720,11 +726,11 @@ export default function Portfolio() {
             <div className="font-semibold mb-2">Quick Links</div>
             <ul className="space-y-1 text-white/80">
               <li><a href="#skills" className="hover:text-white">Skills</a></li>
+              <li><a href="#experience" className="hover:text-white">Experience</a></li>
               <li><a href="#research" className="hover:text-white">Research</a></li>
               <li><a href="#projects" className="hover:text-white">Projects</a></li>
               <li><a href="#articles" className="hover:text-white">Articles</a></li>
               <li><a href="#contributions" className="hover:text-white">Contributions</a></li>
-              <li><a href="#experience" className="hover:text-white">Experience</a></li>
               <li><a href="#contact" className="hover:text-white">Contact</a></li>
             </ul>
           </div>
