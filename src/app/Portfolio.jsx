@@ -753,6 +753,22 @@ export default function Portfolio() {
           animation: shimmer 3s linear infinite;
         }
         @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        
+        /* Custom scrollbar styling */
+        .overflow-x-auto::-webkit-scrollbar {
+          height: 8px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
       `}</style>
 
       {/* Opportunities Popup */}
