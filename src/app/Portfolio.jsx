@@ -374,23 +374,31 @@ export default function Portfolio() {
             <h4 className="text-xl font-semibold mb-4 text-white/90">Experience</h4>
             <div className="space-y-4">
               {EXPERIENCE.map((exp) => (
-                <Card key={exp.title}>
-                  <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-semibold text-lg">{exp.title}</h5>
-                    <span className="text-xs text-white/60 whitespace-nowrap ml-2">{exp.years}</span>
-                  </div>
-                  <div className="text-sm text-white/70 mb-2">{exp.org}</div>
-                  <p className="text-white/80 text-sm mb-3">{exp.blurb}</p>
-                  {exp.awards && (
-                    <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                      <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-xs text-amber-200/90">{exp.awards}</span>
+                <motion.div
+                  key={exp.title}
+                  whileHover={{ 
+                    rotate: [0, -1, 1, -1, 1, 0],
+                    transition: { duration: 0.5 }
+                  }}
+                >
+                  <Card>
+                    <div className="flex justify-between items-start mb-2">
+                      <h5 className="font-semibold text-lg">{exp.title}</h5>
+                      <span className="text-xs text-white/60 whitespace-nowrap ml-2">{exp.years}</span>
                     </div>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                  </div>
-                </Card>
+                    <div className="text-sm text-white/70 mb-2">{exp.org}</div>
+                    <p className="text-white/80 text-sm mb-3">{exp.blurb}</p>
+                    {exp.awards && (
+                      <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                        <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs text-amber-200/90">{exp.awards}</span>
+                      </div>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                      {exp.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                    </div>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -400,23 +408,31 @@ export default function Portfolio() {
             <h4 className="text-xl font-semibold mb-4 text-white/90">Education</h4>
             <div className="space-y-4">
               {EDUCATION.map((edu) => (
-                <Card key={edu.title}>
-                  <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-semibold text-lg">{edu.title}</h5>
-                    <span className="text-xs text-white/60 whitespace-nowrap ml-2">{edu.years}</span>
-                  </div>
-                  <div className="text-sm text-white/70 mb-2">{edu.org}</div>
-                  <p className="text-white/80 text-sm mb-3">{edu.blurb}</p>
-                  {edu.awards && (
-                    <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                      <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-xs text-amber-200/90">{edu.awards}</span>
+                <motion.div
+                  key={edu.title}
+                  whileHover={{ 
+                    rotate: [0, -1, 1, -1, 1, 0],
+                    transition: { duration: 0.5 }
+                  }}
+                >
+                  <Card>
+                    <div className="flex justify-between items-start mb-2">
+                      <h5 className="font-semibold text-lg">{edu.title}</h5>
+                      <span className="text-xs text-white/60 whitespace-nowrap ml-2">{edu.years}</span>
                     </div>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    {edu.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                  </div>
-                </Card>
+                    <div className="text-sm text-white/70 mb-2">{edu.org}</div>
+                    <p className="text-white/80 text-sm mb-3">{edu.blurb}</p>
+                    {edu.awards && (
+                      <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                        <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs text-amber-200/90">{edu.awards}</span>
+                      </div>
+                    )}
+                    <div className="flex flex-wrap gap-2">
+                      {edu.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
+                    </div>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -510,7 +526,6 @@ export default function Portfolio() {
          <div className="flex gap-6 w-max snap-x snap-mandatory items-stretch">
           {filteredProjects.map((p) => (
              <div key={p.title} className="snap-start flex-shrink-0 w-[20rem]">
-               {/* project-measure will be measured and sized to the max height */}
                <div className="project-measure h-auto">
                  <ProjectCard p={p} />
                </div>
@@ -538,65 +553,6 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Experience & Education Section */}
-      <section id="experience" className="mx-auto max-w-7xl px-6 py-12">
-        <h3 className="text-3xl font-bold mb-8">Experience & Education</h3>
-        
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Experience Column */}
-          <div>
-            <h4 className="text-xl font-semibold mb-4 text-white/90">Experience</h4>
-            <div className="space-y-4">
-              {EXPERIENCE.map((exp) => (
-                <Card key={exp.title}>
-                  <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-semibold text-lg">{exp.title}</h5>
-                    <span className="text-xs text-white/60 whitespace-nowrap ml-2">{exp.years}</span>
-                  </div>
-                  <div className="text-sm text-white/70 mb-2">{exp.org}</div>
-                  <p className="text-white/80 text-sm mb-3">{exp.blurb}</p>
-                  {exp.awards && (
-                    <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                      <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-xs text-amber-200/90">{exp.awards}</span>
-                    </div>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Education Column */}
-          <div>
-            <h4 className="text-xl font-semibold mb-4 text-white/90">Education</h4>
-            <div className="space-y-4">
-              {EDUCATION.map((edu) => (
-                <Card key={edu.title}>
-                  <div className="flex justify-between items-start mb-2">
-                    <h5 className="font-semibold text-lg">{edu.title}</h5>
-                    <span className="text-xs text-white/60 whitespace-nowrap ml-2">{edu.years}</span>
-                  </div>
-                  <div className="text-sm text-white/70 mb-2">{edu.org}</div>
-                  <p className="text-white/80 text-sm mb-3">{edu.blurb}</p>
-                  {edu.awards && (
-                    <div className="flex items-start gap-2 mb-3 p-2 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                      <Award size={16} className="text-amber-400 mt-0.5 flex-shrink-0" />
-                      <span className="text-xs text-amber-200/90">{edu.awards}</span>
-                    </div>
-                  )}
-                  <div className="flex flex-wrap gap-2">
-                    {edu.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}
-                  </div>
-                </Card>
-              ))}
-            </div>
           </div>
         </div>
       </section>
