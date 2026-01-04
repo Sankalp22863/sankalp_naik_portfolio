@@ -3,7 +3,7 @@
     "title": "ARMPC - ARIMA Based Model Predictive Control for Adaptive Bitrate in Streaming",
     "authors": ["Sankalp Naik", "O. Khan", "A. Katre", "A. Keskar"],
     "venue": "International Conference on Paradigm Shifts in Communication, Embedded Systems, Machine Learning and Signal Processing (PCEMS)",
-    "year": "2024",
+    "year": "2022",
     "abstract": "Proposed an ARIMA-based (Auto Regressive Integrated Moving Average) technique, to substitute the Harmonic Mean predictive algorithm used in the original Model Predictive Control scheme to determine the best possible bitrate for the given network conditions. Mathematically demonstrated that the proposed model provides us with improvements in the prediction of optimal bitrate for given bandwidth and buffer capacity within computational constraints of practical implementation. Analyzed and compared various methods, including deep learning techniques, to improve adaptive bitrate schemes for improved Quality of Experience (QoE) in video streaming.",
     "tags": ["Adaptive Bitrate", "Video Streaming", "ARIMA", "Model Predictive Control", "QoE"],
     "link": "https://ieeexplore.ieee.org/document/9807874",
