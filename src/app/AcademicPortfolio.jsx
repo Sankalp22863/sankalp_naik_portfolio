@@ -26,6 +26,7 @@ const sections = [
   ["Honors & Awards", "awards"],
   ["Tech Reads", "articles"],
   ["GitHub Contributions", "contributions"],
+  ["Off the Clock", "off-the-clock"],
   ["Contact", "contact"],
 ];
 
@@ -223,6 +224,17 @@ export default function AcademicPortfolio() {
             <h2>GitHub Contributions</h2>
             <div className={styles.calendar}><GitHubCalendar username="Sankalp22863" colorScheme="light" blockSize={10} blockMargin={3} fontSize={13} /></div>
             <a href="https://github.com/Sankalp22863">View GitHub Profile</a>
+          </section>
+
+          <section id="off-the-clock" className={styles.section} aria-labelledby="off-the-clock-heading">
+            <h2 id="off-the-clock-heading">When I am not working on compilers</h2>
+            <ul>
+              <li><strong>Karate (HDKI):</strong> the only setting where I break things on purpose and nobody files a bug report.</li>
+              <li><strong>Badminton, squash, volleyball:</strong> anything with a net, where my reaction time finally beats my compile time.</li>
+              <li><strong>Gym:</strong> the one search space I refuse to prune; every set gets evaluated.</li>
+              <li><strong>Fishing:</strong> a recent hobby, and excellent training for waiting hours on a single HLS synthesis run.</li>
+              <li><strong>Reading:</strong> the only input I do not try to compress into an embedding.</li>
+            </ul>
           </section>
 
           <section id="contact" className={styles.section}>
