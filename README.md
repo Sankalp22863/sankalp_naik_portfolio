@@ -1,6 +1,6 @@
 # Sankalp Naik - Portfolio
 
-A responsive academic portfolio built with Next.js. The layout takes inspiration from [William S. Moses’s academic website](https://wsmoses.com/): a white background, portrait and section navigation in a left sidebar, a biography with contact details, and compact research and publication entries. Content belongs to Sankalp Naik and incorporates `academic_CV/AcademicCV.pdf`.
+A responsive academic portfolio built with Next.js, featuring a white background, portrait and section navigation in a left sidebar, a biography with contact details, and compact research and publication entries. Content belongs to Sankalp Naik and incorporates `academic_CV/AcademicCV.pdf`.
 
 ## 🚀 Features
 
@@ -53,7 +53,7 @@ bun install
 3. Set up environment variables (optional):
 ```bash
 # Create a .env.local file
-NEXT_PUBLIC_GA_ID=G-1F2J2C58G8
+NEXT_PUBLIC_GA_ID=your_measurement_id
 ```
 
 4. Run the development server:
@@ -156,7 +156,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ### Google Analytics
 
-See [the analytics guide](docs/analytics.md) to find the property tracking this site and view visitor, page-view, acquisition, CV download, and interaction reports. The GitHub Pages workflow sets the public `NEXT_PUBLIC_GA_ID` to `G-1F2J2C58G8`; it does not use the previous repository secret. Analytics runs only in production builds and uses automatic GA4 page views to avoid double-counting.
+See [the analytics guide](docs/analytics.md) to find the property tracking this site and view visitor, page-view, acquisition, CV download, and interaction reports. The GitHub Pages workflow configures the measurement ID at build time. Analytics runs only in production builds and uses automatic GA4 page views to avoid double-counting.
 
 ### GitHub Pages
 
