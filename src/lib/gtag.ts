@@ -1,17 +1,10 @@
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
+const configuredId = process.env.NEXT_PUBLIC_GA_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "";
 
-export const pageview = (url: string) => {
-  if (typeof window !== 'undefined' && (window).gtag) {
-    (window).gtag('config', GA_ID, { page_path: url });
-  }
-};
+export const GA_ID = /^G-[A-Z0-9]+$/.test(configuredId.trim()) ? configuredId.trim() : "";
+export const ANALYTICS_ENABLED = process.env.NODE_ENV === "production" && Boolean(GA_ID);
 
-export const event = ({ action, category, label, value }: { action: string; category?: string; label?: string; value?: number }) => {
-  if (typeof window !== 'undefined' && (window).gtag) {
-    (window).gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value,
-    });
+export function trackEvent(name: string, parameters: Record<string, string | number> = {}) {
+  if (ANALYTICS_ENABLED && typeof window !== "undefined") {
+    window.gtag?.("event", name, parameters);
   }
-};
+}

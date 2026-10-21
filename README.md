@@ -53,7 +53,7 @@ bun install
 3. Set up environment variables (optional):
 ```bash
 # Create a .env.local file
-NEXT_PUBLIC_GA_ID=your_google_analytics_id
+NEXT_PUBLIC_GA_ID=G-YOUR_MEASUREMENT_ID
 ```
 
 4. Run the development server:
@@ -84,11 +84,9 @@ This project uses `next/font` to load Source Sans 3 and Geist Mono. The initial 
 │   │   ├── page.tsx               # Root page
 │   │   ├── layout.tsx             # Root layout with GA
 │   │   ├── globals.css            # Global styles & CSS variables
-│   │   └── _components/
-│   │       └── GtagPageView.tsx   # GA page view tracking
 │   ├── components/
 │   │   ├── ui/                    # shadcn/ui components
-│   │   ├── Analytics.tsx          # Analytics wrapper
+│   │   ├── Analytics.tsx          # Portfolio interaction tracking
 │   │   ├── ArticleCard.tsx        # Article display card
 │   │   ├── Contributions.tsx      # GitHub contributions calendar
 │   │   ├── FloatingParallaxCard.tsx  # Interactive profile card
@@ -155,6 +153,14 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## 🚀 Deployment
+
+### Google Analytics
+
+See [the analytics guide](docs/analytics.md) to find the property tracking this site, configure the GitHub Actions `NEXT_PUBLIC_GA_ID` secret, and view visitor, page-view, acquisition, CV download, and interaction reports. Analytics runs only in production builds and uses automatic GA4 page views to avoid double-counting.
+
+### GitHub Pages
+
+`.github/workflows/nextjs.yml` builds with Node.js 24 and deploys the static export using GitHub's Pages artifact workflow. In repository **Settings → Pages**, the source is **GitHub Actions**. Push to `main` or run **Deploy Next.js site to Pages** manually. This workflow preserves the `sankalpnaik.me` domain and injects the analytics ID at build time; a separate `gh-pages` branch deployment is unnecessary.
 
 ### Deploy on Vercel
 

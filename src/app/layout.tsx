@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Source_Sans_3, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import { Suspense } from "react";
-import GtagPageView from "./_components/GtagPageView";
+import Analytics from "@/components/Analytics";
+import { ANALYTICS_ENABLED, GA_ID } from "@/lib/gtag";
 
 const sourceSans = Source_Sans_3({
   variable: "--font-source-sans",
@@ -23,31 +23,29 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
-
   return (
     <html lang="en">
       <body className={`${sourceSans.variable} ${geistMono.variable} antialiased`}>
         {children}
 
-        {/* Google Analytics */}
-        {gaId && (
+        {ANALYTICS_ENABLED && (
           <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga-init" strategy="afterInteractive">
+            <Script id="ga-init" strategy="beforeInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${gaId}', { page_path: window.location.pathname });
+                gtag('config', '${GA_ID}', {
+                  allow_google_signals: false,
+                  allow_ad_personalization_signals: false
+                });
               `}
             </Script>
-            <Suspense fallback={null}>
-              <GtagPageView />
-            </Suspense>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Analytics />
           </>
         )}
       </body>
