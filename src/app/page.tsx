@@ -1,6 +1,5 @@
-"use client"
-import Portfolio from "./Portfolio";
+import AcademicPortfolio from "./AcademicPortfolio";
 
 export default function Page() {
-  return <Portfolio />;
+  return <AcademicPortfolio />;
 }

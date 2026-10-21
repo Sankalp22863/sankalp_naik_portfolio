@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Source_Sans_3, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { Suspense } from "react";
 import GtagPageView from "./_components/GtagPageView";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
 });
 
@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Sankalp Naik",
-  description: "Sankalp Naik Portfolio.",
+  description: "Sankalp Naik — Carnegie Mellon University. Research in heterogeneous memory, hardware–software co-design, and compiler-guided optimization for machine learning.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${sourceSans.variable} ${geistMono.variable} antialiased`}>
         {children}
 
         {/* Google Analytics */}

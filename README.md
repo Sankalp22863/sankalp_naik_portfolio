@@ -1,19 +1,18 @@
 # Sankalp Naik - Portfolio
 
-A modern, interactive portfolio website built with Next.js, featuring a dark theme with glass morphism effects, interactive animations, and comprehensive sections showcasing skills, experience, research, and projects.
+A responsive academic portfolio built with Next.js. The layout takes inspiration from [William S. Moses’s academic website](https://wsmoses.com/): a white background, portrait and section navigation in a left sidebar, a biography with contact details, and compact research and publication entries. Content belongs to Sankalp Naik and incorporates `academic_CV/AcademicCV.pdf`.
 
 ## 🚀 Features
 
-- **Modern Tech Stack**: Built with Next.js 14, React, TypeScript, and Tailwind CSS
-- **Interactive UI**: 
-  - 3D tilt effects on cards using Framer Motion
-  - Floating parallax profile card
-  - Smooth scroll animations
-  - Holiday-themed cursor (December only)
-  - Auto-dismissing opportunity popup
+- **Modern Tech Stack**: Built with Next.js 15, React, TypeScript, and Tailwind CSS
+- **Academic Layout**:
+  - Responsive portrait sidebar and section navigation
+  - Expandable research details and publication abstracts
+  - Keyboard-accessible links, filters, and labeled contact fields
+  - Academic CV and resume downloads
 - **Comprehensive Sections**:
   - Skills showcase with categorized technologies
-  - Experience & Education timeline
+  - Research, experience, education, teaching, and honors
   - Research publications with expandable abstracts
   - Project portfolio with filtering
   - Medium articles showcase
@@ -55,7 +54,6 @@ bun install
 ```bash
 # Create a .env.local file
 NEXT_PUBLIC_GA_ID=your_google_analytics_id
-NEXT_PUBLIC_HOLIDAY_CURSOR=1  # Enable holiday cursor year-round
 ```
 
 4. Run the development server:
@@ -71,16 +69,18 @@ bun dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/AcademicPortfolio.jsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses `next/font` to load Source Sans 3 and Geist Mono. The initial production build needs access to Google Fonts.
 
 ## 📂 Project Structure
 
 ```
 ├── src/
 │   ├── app/
-│   │   ├── Portfolio.jsx          # Main portfolio component
+│   │   ├── AcademicPortfolio.jsx  # Active academic portfolio
+│   │   ├── academic.module.css    # Responsive academic layout
+│   │   ├── Portfolio.jsx          # Preserved previous design
 │   │   ├── page.tsx               # Root page
 │   │   ├── layout.tsx             # Root layout with GA
 │   │   ├── globals.css            # Global styles & CSS variables
@@ -96,6 +96,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 │   │   ├── ProjectCard.tsx        # Project display card
 │   │   └── ResearchCard.tsx       # Research paper card
 │   ├── data/
+│   │   ├── academic.json          # CV-backed research, experience, education, skills
 │   │   ├── articles.json          # Medium articles data
 │   │   ├── projects.json          # Projects data
 │   │   └── research.json          # Research papers data
@@ -115,7 +116,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ### Update Content
 
-1. **Personal Information**: Edit `src/app/Portfolio.jsx` - update name, bio, social links, etc.
+1. **Personal Information**: Edit `src/app/AcademicPortfolio.jsx` - update name, bio, social links, etc.
 
 2. **Projects**: Edit `src/data/projects.json`:
 ```json
@@ -133,15 +134,16 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 4. **Articles**: Edit `src/data/articles.json`
 
-5. **Experience & Education**: Update the `EXPERIENCE` and `EDUCATION` constants in `src/app/Portfolio.jsx`
+5. **Research, Experience, Education, Teaching & Awards**: Edit `src/data/academic.json`. Keep ongoing research and pending patents labeled with their current status.
 
-6. **Skills**: Update the skills cards in the Skills section of `src/app/Portfolio.jsx`
+6. **Skills**: Update `skills` in `src/data/academic.json`.
+
+7. **Academic CV**: After updating `academic_CV/AcademicCV.pdf`, copy it to `public/res/AcademicCV.pdf` to update the downloadable version. The existing resume remains at `public/res/SankalpNaikResume.pdf`.
 
 ### Styling
 
-- **Color Theme**: Edit CSS variables in `src/app/globals.css`
-- **Components**: Customize shadcn/ui components in `src/components/ui`
-- **Animations**: Adjust Framer Motion settings in component files
+- **Academic Layout**: Edit `src/app/academic.module.css` for typography, colors, spacing, and responsive behavior.
+- **Shared Styles**: Edit `src/app/globals.css` for global CSS variables.
 
 ## 📚 Learn More
 
@@ -179,14 +181,11 @@ The static files will be in the `out` directory.
 
 ## 📦 Technologies Used
 
-- **Framework**: [Next.js 14](https://nextjs.org/)
+- **Framework**: [Next.js 15](https://nextjs.org/)
 - **Language**: TypeScript, JavaScript (JSX)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Icons**: [Lucide Icons](https://lucide.dev/)
 - **GitHub Calendar**: [react-github-calendar](https://github.com/grubersjoe/react-github-calendar)
-- **Typewriter Effect**: [react-simple-typewriter](https://github.com/awran5/react-simple-typewriter)
 - **Analytics**: Google Analytics
 
 ## 📄 License

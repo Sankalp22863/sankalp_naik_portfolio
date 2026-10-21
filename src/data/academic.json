@@ -1,0 +1,101 @@
+{
+  "interests": "Heterogeneous memory systems and 3D-stacked HBM; hardware–software co-design for ML workloads; accelerator design-space exploration; compiler-directed memory placement; MLIR and domain-specific languages for heterogeneous hardware; performance modeling and parallel kernel optimization.",
+  "vision": "Modern AI systems are increasingly limited not by compute but by how well software can exploit heterogeneous memory, reconfigurable fabric, and accelerator design spaces too large to search by hand. I want to make these hardware decisions first-class, analyzable objects in the compiler: a modular, MLIR-based stack in which memory placement, accelerator configuration, and code transformation are expressed, searched, and verified within one IR, with learned models guiding the search without replacing the compiler’s reasoning. My work on compiler-visible memory (XBM), design-space search with guarantees (PROSE), and learned program representations (.ksh + TIER) builds toward this goal.",
+  "research": [
+    {
+      "title": "XBM: Heterogeneous 3D-stacked HBM with non-volatile base dies",
+      "status": "First author · Manuscript in preparation · Patent pending",
+      "details": [
+        "Designed a segmented HBM stack with FeRAM-based NVDRAM in the bottom dies and DRAM above; used the read-dominated weight and write-active KV-cache access patterns in LLM inference to motivate heterogeneous memory placement.",
+        "Profiled dense and mixture-of-experts LLM workloads and used PACT thermal simulation to evaluate the design. Relative to an STCO baseline, simulations showed 150% higher bandwidth on bandwidth-bound ML workloads, approximately 98% lower refresh power, and approximately 8.5 °C lower compute-die temperature.",
+        "Developing the architecture manuscript and an MLIR dialect for compiler-directed placement across heterogeneous memory domains; the compiler extension is ongoing."
+      ]
+    },
+    {
+      "title": "PROSE: Region-based probabilistic design-space exploration for HLS",
+      "status": "First author · Manuscript in preparation",
+      "details": [
+        "Built a design-space exploration framework around the observation that Pareto-optimal HLS designs concentrate in a few axis-aligned regions; uses concentration-inequality bounds to certify regions of configurations.",
+        "Evaluated PolyBench kernels on three resource-constrained FPGAs against ScaleHLS-HIDA and AutoDSE; pruned approximately 90% of the configuration space while preserving near-optimal designs.",
+        "Extended the framework to multi-kernel workloads by composing per-kernel region sets; implemented parallel exploration and cost-model-guided autotuning to accelerate the search."
+      ]
+    },
+    {
+      "title": ".ksh + TIER: Multi-level MLIR representations for code generation",
+      "status": "Ongoing research",
+      "details": [
+        "Designing Kernel Shorthand (.ksh), a compact DSL prototyped on xDSL, for LLM-generated programs that lower to optimized GPU kernels.",
+        "Built a C-to-MLIR analysis pipeline through Polygeist, extracting typed dataflow and control-flow graphs at multiple dialect levels; training contrastive RGCN and GraphSAGE embeddings per level with a learned merge.",
+        "Evaluating the embeddings as dense reinforcement-learning rewards for LLM code generation in place of binary pass/fail feedback; experiments remain ongoing."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "M.S. Artificial Intelligence Engineering (ECE)",
+      "organization": "Carnegie Mellon University",
+      "location": "Pittsburgh, PA",
+      "dates": "2025 – Expected Dec 2026",
+      "details": "GPA: 4.0/4.0. Interests: hardware-aware NAS, edge inference, systems for ML, deep learning, and robotics.",
+      "coursework": "How to Write Fast Code II (OpenMP/CUDA); Foundations of Computer Systems; Machine Learning; Deep Learning."
+    },
+    {
+      "title": "B.Tech in Electronics & Communication Engineering",
+      "organization": "Visvesvaraya National Institute of Technology (VNIT)",
+      "location": "Nagpur, India",
+      "dates": "2018 – May 2022",
+      "details": "GPA: 9.78/10.0. Rank 1/140. Visvesvaraya Medal of Excellence.",
+      "coursework": "Computer Architecture; Operating Systems; Numerical Methods & Probability Theory; Algorithms; Signals; VLSI; Machine Learning."
+    }
+  ],
+  "experience": [
+    {
+      "title": "Graduate Research Assistant",
+      "organization": "NEXUS Research Group, Carnegie Mellon University",
+      "dates": "Aug 2025 – Present",
+      "description": "Hardware–software co-design for processors and ML workloads, heterogeneous memory, and compiler-guided optimization. Advisor: Prof. Tathagata Srimani, Electrical & Computer Engineering.",
+      "technologies": "Python, Verilog, C++, Git"
+    },
+    {
+      "title": "Associate Applications Developer",
+      "organization": "Oracle Financial Services Software (OFSS), India",
+      "dates": "Jul 2022 – Jun 2025",
+      "description": "Infrastructure team for a banking platform; owned performance-critical components. Optimized API latency and designed sharded databases and fault-tolerant microservices with asynchronous messaging across multi-cluster deployments.",
+      "technologies": "Java, JAX-RS, SQL, Distributed Systems, JPA",
+      "award": "PaceSetter Award for exceptional performance at Oracle."
+    }
+  ],
+  "teaching": [
+    {
+      "title": "Teaching Assistant, 18-645 How to Write Fast Code I",
+      "dates": "Aug 2026 – Present",
+      "description": "Guide students on code optimization, profiling, and benchmarking; diagnose performance bottlenecks, review assignments, and run labs and office hours."
+    },
+    {
+      "title": "Teaching Assistant, 18-738 Sports Technology",
+      "dates": "Jan 2026 – May 2026",
+      "description": "Guided AI and embedded-systems student projects."
+    }
+  ],
+  "skills": [
+    { "category": "Compilers & IR", "items": "MLIR, LLVM IR, Polygeist, dialect design, analysis passes, pass pipelines, IR lowering, static and dynamic analysis, cost modeling" },
+    { "category": "Hardware & Architecture", "items": "Computer architecture, Vitis HLS, AMD Versal HBM, memory-hierarchy design, HBM and 3D DRAM, ARM64/Apple Silicon, hardware–software co-design, roofline analysis, performance modeling, thermal simulation (PACT), Verilog" },
+    { "category": "Parallel Programming", "items": "CUDA, OpenMP, SIMD, tiling, warp-level primitives, Nsight" },
+    { "category": "On-Device & Applied ML", "items": "PyTorch, JAX, Core ML, classic ML, LLM benchmarking, graph neural networks (RGCN, GraphSAGE), contrastive learning, RL for code generation, transformer inference" },
+    { "category": "Performance-Critical Systems", "items": "C/C++ performance optimization, Java (JAX-RS), profiling and debugging, CMake, LLVM/MLIR" },
+    { "category": "Infrastructure & Reliability", "items": "Benchmarking, observability, distributed systems fundamentals, fault tolerance" },
+    { "category": "Languages", "items": "C++, C, CUDA C, Python, Java, SQL" }
+  ],
+  "projects": [
+    {
+      "title": "CUDA Linear Algebra Library",
+      "desc": "GEMM, LU, TRSM, and TRSV kernels with register/shared-memory tiling and warp-level primitives; Nsight profiling to isolate memory-bound regimes.",
+      "tags": ["C++", "CUDA", "Linear Algebra", "Nsight", "Performance Optimization"]
+    }
+  ],
+  "awards": [
+    "Visvesvaraya Medal of Excellence (Rank 1/140), VNIT, 2022",
+    "Best Paper Award, PCEMS 2022",
+    "PaceSetter Award for exceptional performance at Oracle"
+  ]
+}
