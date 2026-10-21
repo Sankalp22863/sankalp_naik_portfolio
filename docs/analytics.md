@@ -1,15 +1,17 @@
 # Google Analytics
 
-The portfolio uses Google Analytics 4 (GA4). Its deployed Measurement ID was `G-LYDLM0Q0L0` when checked on October 21, 2026. The GitHub Pages build workflow reads the `NEXT_PUBLIC_GA_ID` GitHub Actions repository secret. The ID is embedded at build time; changing it requires a rebuild and deployment.
+The portfolio uses Google Analytics 4 (GA4). The confirmed Measurement ID for `sankalpnaik.me` is `G-1F2J2C58G8`. The GitHub Pages build workflow sets `NEXT_PUBLIC_GA_ID` to this ID directly. Measurement IDs are public and embedded in the site's JavaScript; the old GitHub Actions secret is no longer used. The ID is embedded at build time, so this change takes effect after a rebuild and deployment.
+
+The previous live deployment used `G-LYDLM0Q0L0`. Historical data stays in that original property; new visits will go to the confirmed property once the updated workflow deploys.
 
 ## Find the correct property
 
 1. Sign in at https://analytics.google.com with the Google account that owns the property.
 2. Use the account/property selector to select a property, then open **Admin → Data streams → Web**.
-3. Check the stream URL and Measurement ID. The portfolio's stream should use `https://sankalpnaik.me` and match `G-LYDLM0Q0L0`.
+3. Check the stream URL and Measurement ID. The portfolio's stream should use `https://sankalpnaik.me` and match `G-1F2J2C58G8`.
 4. An account or property name such as `techyscout-99011` does not establish which website is tracked. Check its web streams, and switch properties if necessary.
 
-If none matches, create a GA4 property and a Web data stream for `https://sankalpnaik.me`. Copy its `G-...` Measurement ID to the repository's **Settings → Secrets and variables → Actions → NEXT_PUBLIC_GA_ID**, then rerun the deployment workflow. Confirm which property you want to use before replacing the existing ID; history stays in the original property.
+If the property is missing from your account, sign in with the account that owns this stream or request access from its administrator. To switch properties in the future, update `NEXT_PUBLIC_GA_ID` in `.github/workflows/nextjs.yml` and deploy the change. For builds outside GitHub Actions, set `NEXT_PUBLIC_GA_ID=G-1F2J2C58G8` in the build environment or `.env.local`.
 
 ## Reports and collection settings
 

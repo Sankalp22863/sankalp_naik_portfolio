@@ -29,7 +29,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
+      # Public GA4 Measurement ID for sankalpnaik.me, embedded in the site bundle.
+      NEXT_PUBLIC_GA_ID: G-1F2J2C58G8
     steps:
       - name: Checkout
         uses: actions/checkout@v6
